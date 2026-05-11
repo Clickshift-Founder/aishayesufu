@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — Your Questions Answered | Aisha4Senate</title>
+  <meta name="description" content="Get answers to common questions about Aisha Yesufu, the campaign, the agenda, volunteering, voting, and more.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .faq-hero { background: var(--green-deep); padding: 120px 0 80px; text-align: center; position: relative; overflow: hidden; }
+    .faq-hero::before { content: '?'; position: absolute; font-family: var(--font-display); font-size: clamp(16rem,40vw,32rem); color: rgba(255,255,255,.03); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+    .faq-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem,6vw,4.5rem); color: var(--cream); line-height: 1.1; margin-bottom: 1rem; }
+    .faq-hero h1 span { color: var(--gold); }
+    .faq-hero p { color: rgba(247,242,234,.7); font-size: 1.05rem; max-width: 540px; margin: 0 auto 2rem; }
+
+    /* Search */
+    .faq-search-bar { max-width: 600px; margin: 0 auto 0; position: relative; }
+    .faq-search-bar input { width: 100%; padding: 1rem 1.5rem 1rem 3rem; border: none; border-radius: 4px; font-size: 1rem; background: rgba(255,255,255,.1); color: var(--cream); border: 1.5px solid rgba(255,255,255,.2); box-sizing: border-box; }
+    .faq-search-bar input::placeholder { color: rgba(247,242,234,.4); }
+    .faq-search-bar input:focus { outline: none; background: rgba(255,255,255,.15); border-color: var(--gold); }
+    .search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: rgba(247,242,234,.4); font-size: 1rem; }
+
+    /* FAQ Layout */
+    .faq-body { background: var(--cream); padding: 70px 0; }
+    .faq-layout { display: grid; grid-template-columns: 260px 1fr; gap: 3rem; align-items: start; }
+    .faq-sidebar { position: sticky; top: 90px; }
+    .faq-sidebar-title { font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: #aaa; margin-bottom: 1rem; }
+    .faq-cat-list { list-style: none; padding: 0; }
+    .faq-cat-list li { margin-bottom: .25rem; }
+    .faq-cat-list a { display: block; padding: .65rem 1rem; border-radius: 4px; font-size: .9rem; color: #555; text-decoration: none; transition: background .15s, color .15s; border-left: 3px solid transparent; }
+    .faq-cat-list a:hover { background: #fff; color: var(--green-deep); }
+    .faq-cat-list a.active { background: var(--green-deep); color: var(--gold); border-left-color: var(--gold); }
+
+    /* Categories */
+    .faq-category { margin-bottom: 3.5rem; }
+    .faq-cat-header { font-family: var(--font-display); font-size: 1.75rem; color: var(--green-deep); margin-bottom: 1.5rem; padding-bottom: .75rem; border-bottom: 2px solid var(--gold); }
+    .faq-cat-icon { font-size: 1.3rem; margin-right: .5rem; }
+
+    /* Accordion */
+    .accordion-item { background: #fff; border-radius: 4px; margin-bottom: .75rem; border: 1px solid rgba(42,43,129,.08); overflow: hidden; }
+    .accordion-item.open { border-color: rgba(42,43,129,.2); }
+    .accordion-q { width: 100%; text-align: left; padding: 1.25rem 1.5rem; background: none; border: none; font-size: .98rem; font-weight: 600; color: var(--near-black); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-family: var(--font-body); line-height: 1.5; transition: background .15s; }
+    .accordion-q:hover { background: rgba(42,43,129,.03); }
+    .accordion-item.open .accordion-q { background: rgba(42,43,129,.04); color: var(--green-deep); }
+    .accordion-toggle { flex-shrink: 0; width: 24px; height: 24px; background: rgba(42,43,129,.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .9rem; transition: transform .3s, background .2s; }
+    .accordion-item.open .accordion-toggle { transform: rotate(45deg); background: var(--gold); color: var(--green-deep); }
+    .accordion-a { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+    .accordion-item.open .accordion-a { max-height: 800px; }
+    .accordion-a-inner { padding: 0 1.5rem 1.5rem; }
+    .accordion-a-inner p { color: #444; font-size: .95rem; line-height: 1.75; margin-bottom: .75rem; }
+    .accordion-a-inner strong { color: var(--green-deep); }
+    .accordion-a-inner ol, .accordion-a-inner ul { padding-left: 1.25rem; margin-bottom: .75rem; }
+    .accordion-a-inner li { color: #444; font-size: .95rem; line-height: 1.75; }
+    .accordion-highlight { background: rgba(237,131,14,.08); border-left: 3px solid var(--gold); padding: .75rem 1rem; border-radius: 0 4px 4px 0; margin: 1rem 0; font-style: italic; color: var(--green-deep); font-size: .95rem; }
+
+    /* No results */
+    .no-results { text-align: center; padding: 4rem; display: none; }
+    .no-results p { color: #888; font-size: 1rem; }
+
+    /* CTA section */
+    .faq-cta { background: var(--green-deep); padding: 80px 0; text-align: center; }
+    .faq-cta h2 { font-family: var(--font-display); font-size: clamp(2rem,4vw,3rem); color: var(--cream); margin-bottom: 1rem; }
+    .faq-cta h2 span { color: var(--gold); }
+    .faq-cta p { color: rgba(247,242,234,.7); font-size: 1rem; max-width: 520px; margin: 0 auto 2.5rem; }
+
+    @media(max-width:900px) {
+      .faq-layout { grid-template-columns: 1fr; }
+      .faq-sidebar { position: static; }
+      .faq-cat-list { display: flex; flex-wrap: wrap; gap: .5rem; }
+      .faq-cat-list li { margin: 0; }
+      .faq-cat-list a { padding: .45rem .9rem; border-radius: 2rem; border-left: none; font-size: .8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo"><img src="/images/aisha-logo.png" alt="Aisha4Senate" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="nav-logo-text" style="display:none">AISHA<span>4</span>SENATE</span></a>
+    <div class="nav-links">
+      <a href="about.html">About</a><a href="agenda.html">Agenda</a><a href="contrast.html">The Contrast</a>
+      <a href="area-councils.html">Area Councils</a><a href="events.html">Events</a>
+      <a href="media.html">Media</a><a href="faq.html" style="color:var(--gold)">FAQ</a>
+      <a href="get-involved.html" class="nav-cta">Get Involved</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile">
+  <a href="about.html">About</a><a href="agenda.html">Agenda</a><a href="contrast.html">The Contrast</a>
+  <a href="area-councils.html">Area Councils</a><a href="events.html">Events</a>
+  <a href="media.html">Media</a><a href="faq.html" style="color:var(--gold)">FAQ</a>
+  <a href="get-involved.html" style="color:var(--gold)">Get Involved →</a>
+</div>
+
+<!-- HERO -->
+<section class="faq-hero">
+  <div class="container">
+    <div class="hero-badge">35 Questions · 8 Categories · Honest Answers</div>
+    <h1>Frequently Asked<br><span>Questions</span></h1>
+    <p>Everything you need to know about Aisha, the campaign, and A Better Abuja. Can't find your answer? Contact us directly.</p>
+    <div class="faq-search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="faqSearch" placeholder="Search FAQs — try 'indigene' or 'voting' or 'donate'...">
+    </div>
+  </div>
+</section>
+
+<!-- FAQ BODY -->
+<section class="faq-body">
+  <div class="container">
+    <div class="faq-layout">
+
+      <!-- Sidebar -->
+      <aside class="faq-sidebar">
+        <div class="faq-sidebar-title">Jump to Category</div>
+        <ul class="faq-cat-list">
+          <li><a href="#about-aisha" class="cat-link active">👤 About Aisha</a></li>
+          <li><a href="#the-campaign" class="cat-link">🗳️ The Campaign</a></li>
+          <li><a href="#the-agenda" class="cat-link">📋 The Agenda</a></li>
+          <li><a href="#get-involved" class="cat-link">🙋 Getting Involved</a></li>
+          <li><a href="#donations" class="cat-link">💰 Donations</a></li>
+          <li><a href="#voter-info" class="cat-link">🗂️ Voter Information</a></li>
+          <li><a href="#security" class="cat-link">🛡️ Security & Safety</a></li>
+          <li><a href="#indigenous" class="cat-link">🏘️ Indigenous Rights</a></li>
+        </ul>
+      </aside>
+
+      <!-- Questions -->
+      <main id="faqMain">
+
+        <!-- CATEGORY 1: ABOUT AISHA -->
+        <div class="faq-category" id="about-aisha">
+          <div class="faq-cat-header"><span class="faq-cat-icon">👤</span>About Aisha</div>
+
+          <div class="accordion-item" data-keywords="indigene edo state abuja vote">
+            <button class="accordion-q">You're from Edo State, not an indigene. Why should Abuja vote for you?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Let me be clear: Abuja is not just for indigenes. Abuja is Nigeria's capital — YOUR capital, OUR capital.</p>
+              <p>The Igbo woman selling in Wuse Market — she's Abuja. The Hausa okada rider in Kubwa — he's Abuja. The Yoruba civil servant in Garki — she's Abuja. The Gbagyi farmer whose land was taken — he's Abuja.</p>
+              <p>This question about indigeneship is the exact distraction they want you focused on while they steal from all of us.</p>
+              <div class="accordion-highlight"><strong>I'm asking you to choose COMPETENCE over tribe, INTEGRITY over ethnicity, RESULTS over region.</strong></div>
+              <p>My agenda puts indigenous rights at the CENTER — full compensation for ancestral lands, legal protection against displacement, a Land Rights Tribunal. Show me ONE so-called 'indigene' politician who has fought for indigenous people the way I'm committed to fighting.</p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="activist politician politics trust office">
+            <button class="accordion-q">You're an activist. Activists don't make good politicians. Why should we trust you?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>You know what that criticism really means? It means "She can't be controlled." "She won't play the game." "She'll actually do what she promised."</p>
+              <p>Let me ask you something: How's it working out electing politicians who've NEVER fought for anything in their lives?</p>
+              <div class="accordion-highlight">What activists know how to do: FIGHT. We know how to mobilize people. We know how to build movements. We know how to take on the powerful and WIN.</div>
+              <p><strong>Track record speaks:</strong> Co-convened #BringBackOurGirls and kept it alive for 1,000+ days. Led #NigeriansMarchAgainstCorruption. Stood in #EndSARS when it was dangerous. Founded Citizens Hub, empowering thousands.</p>
+              <p>The best leaders didn't come from political dynasties. They came from the struggle: Nelson Mandela, Václav Havel, Wangari Maathai.</p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="ireti kingibe peter obi ndc senate conflict">
+            <button class="accordion-q">Are you running against Senator Ireti Kingibe, who is also aligned with Peter Obi?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Let me be very clear: I am not running AGAINST Senator Ireti Kingibe. I am running to REPRESENT the hopes and aspirations of Abuja citizens.</p>
+              <p>Senator Ireti is a colleague, a woman I respect. Yes, Peter Obi is my principal. And here's what's important: <strong>Peter Obi supports BOTH of us.</strong> Because democracy is strengthened when citizens have OPTIONS.</p>
+              <div class="accordion-highlight">Democracy thrives on choice, not coronation.</div>
+              <p>This is not about conflict between two women. This is about giving the people of Abuja the power to choose their own representation based on who they believe will fight hardest for them. <strong>Let the voters decide.</strong></p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="adc party hopper loyalty ndc">
+            <button class="accordion-q">Why did you leave the ADC? Are you just a party hopper without loyalty?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>I didn't leave the ADC because of disappointment or conflict. I left to honor a commitment and follow where the movement is going.</p>
+              <p>When I joined the ADC, it was to support Peter Obi's presidential ambition. After the 2023 elections, as we looked ahead to 2027, Peter Obi chose the NDC as the vehicle for this vision.</p>
+              <p>My decision to join the NDC wasn't about hero worship — it was about strategic alignment with where millions of Nigerians are already heading.</p>
+              <div class="accordion-highlight">I tidied up ALL my obligations to the ADC before leaving. I ensured a clean transition. I served with honor while I was there.</div>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="weakness flaw criticism difficult outspoken">
+            <button class="accordion-q">What's your biggest weakness?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>I don't suffer incompetence or corruption quietly. Some call that confrontational. I call it accountability.</p>
+              <p>I've been told I'm "too direct," "too outspoken," "too uncompromising."</p>
+              <div class="accordion-highlight">Nigeria didn't get into this mess because of people who spoke up too much. We got here because too many people stayed silent when they should have been shouting.</div>
+              <p>The Senate doesn't need more people who "get along." It needs people who get RESULTS.</p>
+            </div></div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 2: THE CAMPAIGN -->
+        <div class="faq-category" id="the-campaign">
+          <div class="faq-cat-header"><span class="faq-cat-icon">🗳️</span>The Campaign</div>
+
+          <div class="accordion-item" data-keywords="election date february 2027">
+            <button class="accordion-q">When is the election?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>The Federal Capital Territory Senate election is on <strong>Saturday, February 14, 2027.</strong></p>
+              <p>Voter registration is ongoing. Make sure you're registered, know your polling unit, and mark your calendar!</p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="office senate position fct">
+            <button class="accordion-q">What office are you running for exactly?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>I'm running for the <strong>Federal Capital Territory (FCT) Senate seat</strong> in the National Assembly.</p>
+              <p>The FCT Senator represents ALL residents across the six area councils: AMAC, Bwari, Gwagwalada, Kuje, Kwali, and Abaji — all 3.5 million of you.</p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="ndc new democratic congress party">
+            <button class="accordion-q">What is the NDC?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>The <strong>Nigeria Democratic Congress (NDC)</strong> is the political party I'm contesting under. It's the party Peter Obi chose as the vehicle for the movement toward competence-based, character-driven governance in Nigeria.</p>
+              <p>The NDC represents where millions of Nigerians — across tribes, religions, and regions — are placing their hope for 2027.</p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="win money war chest finance grassroots">
+            <button class="accordion-q">Can you really win without a massive political war chest?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Money matters in elections, but it's not everything.</p>
+              <div class="accordion-highlight">What we're building is something money can't buy: authentic grassroots support.</div>
+              <p>When 100,000 volunteers knock on doors, register voters, and share our message, that's more powerful than billboards. Look at Peter Obi's 2023 campaign — massively outspent by the establishment, yet created the largest grassroots movement in Nigeria's history.</p>
+              <p>Our currency is credibility, track record, and commitment to service. Those things can't be bought, only earned. And I've spent 21 years earning them.</p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="vote buying fraud malpractice rigging">
+            <button class="accordion-q">How will you deal with vote buying and electoral malpractice?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Electoral fraud is real, and we're not naive about it. Our strategy is fourfold:</p>
+              <ol>
+                <li><strong>Massive voter education</strong> — teaching people that their vote is worth more than any handout.</li>
+                <li><strong>100,000 polling unit volunteers</strong> — monitoring the process and reporting irregularities in real-time.</li>
+                <li><strong>Civil society & international observer partnerships</strong> for transparency.</li>
+                <li><strong>Aggressive legal action</strong> — we will pursue EVERY documented case of fraud.</li>
+              </ol>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="lose defeat what if">
+            <button class="accordion-q">What if you lose?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>I'll continue fighting for citizens — my commitment doesn't depend on holding office. But we're not planning to lose.</p>
+              <div class="accordion-highlight">The 100,000 volunteers we're training don't disappear on February 15, 2027. The accountability structures we're creating don't vanish. This is bigger than one election.</div>
+              <p>With your help, we won't have to worry about "what if we lose." <strong>We're going to shock them in 2027.</strong></p>
+            </div></div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 3: THE AGENDA -->
+        <div class="faq-category" id="the-agenda">
+          <div class="faq-cat-header"><span class="faq-cat-icon">📋</span>The Agenda</div>
+
+          <div class="accordion-item" data-keywords="seven pillars agenda policy">
+            <button class="accordion-q">What are the Seven Pillars?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>The Seven Pillars are my legislative agenda for A Better Abuja:</p>
+              <ol>
+                <li><strong>Security</strong> — "Nobody Should Fear For Their Life In Abuja"</li>
+                <li><strong>Economic Empowerment</strong> — "Your Hustle Must Pay"</li>
+                <li><strong>Infrastructure</strong> — "Water, Roads, Light, Healthcare Are Your Rights"</li>
+                <li><strong>Education</strong> — "No Child Left Behind"</li>
+                <li><strong>Maternal Health</strong> — "Pregnancy Is Not A Death Sentence"</li>
+                <li><strong>Land Rights</strong> — "They Can't Just Bulldoze Your Home"</li>
+                <li><strong>Transparency</strong> — "You Will See Where Every Kobo Goes"</li>
+              </ol>
+              <p>Each pillar has a specific bill, measurable outcomes, and transparent tracking. <a href="agenda.html" style="color:var(--green-deep)">Read the full agenda →</a></p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="fund money budget finance programs">
+            <button class="accordion-q">How will these programs be funded?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <ol>
+                <li><strong>Equitable FCT Budget Allocation</strong> — Abuja generates billions that should benefit residents, not disappear into unaccountable projects.</li>
+                <li><strong>Public-Private Partnerships</strong> with development agencies (World Bank, EU, AfDB) and private sector.</li>
+                <li><strong>Grassroots Mobilization</strong> — 100,000 committed citizens providing hands-on support.</li>
+                <li><strong>Federal Government Grants</strong> for security, infrastructure, and healthcare.</li>
+                <li><strong>Smart Resource Management</strong> — complete transparency prevents waste and corruption.</li>
+              </ol>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="timeline 100 days implementation when">
+            <button class="accordion-q">What's the timeline for implementation?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p><strong>First 100 Days:</strong> All seven bills drafted, consulted, and introduced. Implementation agencies established. Budget allocations secured.</p>
+              <p><strong>First Year:</strong> 10 community policing centers operational. 50 boreholes, 2 major roads complete. 10 PHCs upgraded. 50 schools renovated. 25,000 youth trained.</p>
+              <p><strong>Years 2–4:</strong> Full rollout across all 62 wards. All targets met or exceeded. Monthly progress reports published.</p>
+              <div class="accordion-highlight">Real-time dashboard tracking every project. You'll see exactly where we are at any moment.</div>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="measure success numbers outcomes accountability">
+            <button class="accordion-q">How will you measure success?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Hard numbers, not rhetoric:</p>
+              <ul>
+                <li>500,000+ residents with clean water (verifiable by location)</li>
+                <li>50+ PHCs upgraded (site visits, before/after photos)</li>
+                <li>200+ schools renovated (photographically documented)</li>
+                <li>100,000+ women served through maternal health programs</li>
+                <li>50,000+ scholarships awarded (recipient list published)</li>
+              </ul>
+              <p>Every metric will be publicly tracked, independently audited quarterly, and community-verified. If I say 500,000 people got water, you can visit those communities and SEE the boreholes.</p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="corruption prevent constituency projects steal">
+            <button class="accordion-q">How will you prevent corruption in constituency projects?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <ol>
+                <li><strong>Community Monitoring Committees</strong> — citizens tracking execution in their own areas.</li>
+                <li><strong>Digital Transparency Platform</strong> — all budgets published in real-time. Anyone can see where every naira goes.</li>
+                <li><strong>Independent Civil Society Auditing</strong></li>
+                <li><strong>Monthly Public Reporting</strong> — no hiding behind bureaucracy.</li>
+                <li><strong>Legal Consequences</strong> — prosecution, not just administrative slaps.</li>
+              </ol>
+              <div class="accordion-highlight">They see constituency projects as opportunities to enrich themselves. I see them as sacred trust from the people.</div>
+            </div></div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 4: GETTING INVOLVED -->
+        <div class="faq-category" id="get-involved">
+          <div class="faq-cat-header"><span class="faq-cat-icon">🙋</span>Getting Involved</div>
+
+          <div class="accordion-item" data-keywords="volunteer how sign up join">
+            <button class="accordion-q">How can I volunteer?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Join the #Aisha4SenateFamily! Ways to volunteer: door-to-door canvassing, phone banking, social media amplification, event coordination, poll monitoring, and specialized teams (tech, legal, research, comms).</p>
+              <p>No experience needed. We provide training and support. <a href="get-involved.html" style="color:var(--green-deep)">Sign up here →</a></p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="outside abuja remote not in abuja diaspora">
+            <button class="accordion-q">Can I volunteer if I don't live in Abuja?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Yes! Remote volunteer opportunities include: social media management, phone banking (call voters from anywhere), content creation (writing, graphics, videos), research and fact-checking, fundraising, and database management.</p>
+              <div class="accordion-highlight">Location doesn't limit impact.</div>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="experience beginner first time">
+            <button class="accordion-q">Do I need experience to volunteer?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Absolutely not! Most of our volunteers are first-timers. We provide a 2-hour orientation, training specific to your role, ongoing mentorship, and all resources.</p>
+              <p><strong>You don't need experience — just passion for A Better Abuja.</strong></p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="time commitment how much hours weekly">
+            <button class="accordion-q">How much time do I need to commit?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Whatever you can give! Even <strong>1 hour a week</strong> makes a difference. You can share posts on social media (5 minutes daily), phone bank from home (1 hour weekly), or attend one event per month.</p>
+              <p>There's no minimum commitment. Every contribution counts.</p>
+            </div></div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 5: DONATIONS -->
+        <div class="faq-category" id="donations">
+          <div class="faq-cat-header"><span class="faq-cat-icon">💰</span>Donations</div>
+
+          <div class="accordion-item" data-keywords="donate how payment bank transfer">
+            <button class="accordion-q">How do I donate?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Visit <a href="#" style="color:var(--green-deep)">donate.aisha4senate.ng</a> or contact <a href="mailto:donate@aisha4senate.ng" style="color:var(--green-deep)">donate@aisha4senate.ng</a></p>
+              <p><strong>Donation methods:</strong> Bank transfer, card payment, mobile money, USSD. All donations tracked and published monthly.</p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="small donation 1000 naira little">
+            <button class="accordion-q">What if I can only donate ₦1,000?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <div class="accordion-highlight">₦1,000 matters. If 10,000 people donate ₦1,000, that's ₦10 million — enough to organize 100 ward-level rallies.</div>
+              <p>We'd rather have 10,000 donations of ₦1,000 than 10 donations of ₦1 million. Because when thousands of people invest in a campaign, thousands of people fight to protect that investment. <strong>Small donations from many people = people-powered campaign.</strong></p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="transparency where money goes track">
+            <button class="accordion-q">How do I know my donation is being used properly?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>We publish monthly financial reports showing all donations and expenditures. Complete transparency is a core principle.</p>
+              <p>You can choose to have your name published for recognition, or remain anonymous. Your choice, your privacy respected.</p>
+            </div></div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 6: VOTER INFORMATION -->
+        <div class="faq-category" id="voter-info">
+          <div class="faq-cat-header"><span class="faq-cat-icon">🗂️</span>Voter Information</div>
+
+          <div class="accordion-item" data-keywords="register vote PVC INEC registration">
+            <button class="accordion-q">Am I registered to vote?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Check your registration status at the <a href="https://voters.inecnigeria.org" target="_blank" style="color:var(--green-deep)">INEC Voter Verification Portal</a> or call the INEC hotline.</p>
+              <p>Not registered? Visit your nearest INEC registration center with your National ID, Passport, or Driver's License.</p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="polling unit where vote location">
+            <button class="accordion-q">Where is my polling unit?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Use the <a href="https://voters.inecnigeria.org" target="_blank" style="color:var(--green-deep)">INEC Voter Verification Portal</a> to locate your polling unit. Enter your details and you'll see the exact location, map, and directions.</p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="election day voting hours when time">
+            <button class="accordion-q">What time do polls open on election day?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p><strong>Election Day:</strong> Saturday, February 14, 2027.<br><strong>Polling hours:</strong> 8:00 AM – 2:00 PM.<br>You must vote at your registered polling unit. Plan ahead.</p>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="lost PVC card replace replacement">
+            <button class="accordion-q">What if I lost my PVC?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Visit your registration center with a valid ID to request a replacement. <strong>Do this EARLY.</strong> Replacement takes time — don't wait until close to the election.</p>
+            </div></div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 7: SECURITY & SAFETY -->
+        <div class="faq-category" id="security">
+          <div class="faq-cat-header"><span class="faq-cat-icon">🛡️</span>Security & Safety</div>
+
+          <div class="accordion-item" data-keywords="one chance robbery taxi bus safety route">
+            <button class="accordion-q">How will you address "one chance" robberies?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Multi-pronged approach:</p>
+              <ol>
+                <li><strong>Enhanced community policing</strong> on all major routes</li>
+                <li><strong>Mandatory registration and GPS tracking</strong> of all commercial vehicles</li>
+                <li><strong>Undercover "one chance" task force</strong> targeting known hotspots</li>
+                <li><strong>Designated safe taxi ranks</strong> at major locations</li>
+                <li><strong>Partnership with ride-hailing companies</strong> for data sharing</li>
+                <li><strong>Quick-response teams</strong> with 5-minute target response time</li>
+              </ol>
+              <div class="accordion-highlight">Target: 70% reduction in "one chance" incidents within the first year.</div>
+            </div></div>
+          </div>
+
+          <div class="accordion-item" data-keywords="kidnapping rural bandits remote communities">
+            <button class="accordion-q">What about kidnappings and bandits in rural areas?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Rural security strategy:</p>
+              <ol>
+                <li>Community policing partnerships with local vigilantes and traditional rulers</li>
+                <li>Technology-driven surveillance in high-risk areas</li>
+                <li>Quick-response teams stationed in each area council</li>
+                <li>Intelligence gathering through trusted community networks</li>
+                <li>Improved road access for security and emergency vehicles</li>
+              </ol>
+              <p><strong>No community should be too remote for protection.</strong></p>
+            </div></div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 8: INDIGENOUS RIGHTS -->
+        <div class="faq-category" id="indigenous">
+          <div class="faq-cat-header"><span class="faq-cat-icon">🏘️</span>Indigenous Rights</div>
+
+          <div class="accordion-item" data-keywords="gbagyi koro bassa gade compensation land indigenous">
+            <button class="accordion-q">How will you ensure indigenous people are actually compensated?<span class="accordion-toggle">+</span></button>
+            <div class="accordion-a"><div class="accordion-a-inner">
+              <p>Legislative backing, not just promises. The <strong>Indigenous Rights & Land Protection Bill</strong> includes:</p>
+              <ol>
+                <li>Mandatory full compensation BEFORE any land acquisition</li>
+                <li>Land Rights Tribunal with indigenous representation</li>
+                <li>Community veto power over developments affecting ancestral lands</li>
+                <li><strong>Retroactive compensation</strong> for past land taken without payment</li>
+                <li>Legal penalties for government officials who violate these rights</li>
+              </ol>
+              <div class="accordion-highlight">This will be LAW, not policy. Enforceable. Actionable. Justiciable. The Gbagyi, Koro, Bassa, and Gade people will finally get justice.</div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="no-results" id="noResults">
+          <p>No questions matched your search. Try different keywords or <a href="mailto:info@aisha4senate.ng" style="color:var(--green-deep)">contact us directly</a>.</p>
+        </div>
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="faq-cta">
+  <div class="container">
+    <div class="section-label" style="color:rgba(237,131,14,.5)">STILL HAVE QUESTIONS?</div>
+    <h2>Didn't Find Your <span>Answer?</span></h2>
+    <p>We respond to all inquiries within 48 hours. Ask us anything — your questions matter.</p>
+    <div class="btn-group">
+      <a href="mailto:info@aisha4senate.ng" class="btn btn-gold">Contact Us →</a>
+      <a href="events.html" class="btn" style="border:1px solid rgba(247,242,234,.3);color:var(--cream)">Attend a Town Hall</a>
+    </div>
+    <p style="margin-top:2rem;color:rgba(247,242,234,.5);font-family:var(--font-mono);font-size:.85rem">info@aisha4senate.ng · +234 803 357 9711</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">AISHA<span>4</span>SENATE</div>
+        <p class="tagline">A Better Abuja — For All Of Us.<br>FCT Senate 2027 · NDC</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Twitter">𝕏</a>
+          <a href="#" class="footer-social" aria-label="Facebook">f</a>
+          <a href="#" class="footer-social" aria-label="Instagram">▣</a>
+          <a href="#" class="footer-social" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Quick Links</h4><ul>
+        <li><a href="about.html">About Aisha</a></li><li><a href="agenda.html">The 7 Pillars</a></li>
+        <li><a href="contrast.html">The Contrast</a></li><li><a href="get-involved.html">Join Movement</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="media.html">Media Center</a></li><li><a href="events.html">Events</a></li>
+        <li><a href="area-councils.html">Area Councils</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item"><div><strong>Email</strong>media@aisha4senate.ng</div></div>
+        <div class="footer-contact-item"><div><strong>Phone</strong>+234 803 357 9711</div></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024–2027 Aisha Yesufu for Senate Campaign. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Accordion
+  document.querySelectorAll('.accordion-q').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const item = this.closest('.accordion-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // FAQ Search
+  const searchInput = document.getElementById('faqSearch');
+  searchInput.addEventListener('input', function() {
+    const q = this.value.toLowerCase().trim();
+    let visible = 0;
+    document.querySelectorAll('.accordion-item').forEach(item => {
+      const text = (item.querySelector('.accordion-q').textContent + (item.dataset.keywords || '') + (item.querySelector('.accordion-a-inner').textContent || '')).toLowerCase();
+      const match = !q || text.includes(q);
+      item.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    // Show/hide categories
+    document.querySelectorAll('.faq-category').forEach(cat => {
+      const visible = Array.from(cat.querySelectorAll('.accordion-item')).some(i => i.style.display !== 'none');
+      cat.style.display = visible ? '' : 'none';
+    });
+    document.getElementById('noResults').style.display = (q && visible === 0) ? 'block' : 'none';
+  });
+
+  // Sidebar active state on scroll
+  const categories = document.querySelectorAll('.faq-category');
+  const catLinks = document.querySelectorAll('.cat-link');
+  window.addEventListener('scroll', () => {
+    categories.forEach(cat => {
+      const rect = cat.getBoundingClientRect();
+      if (rect.top <= 160 && rect.bottom >= 160) {
+        catLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.cat-link[href="#${cat.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  });
+</script>
+</body>
+</html>

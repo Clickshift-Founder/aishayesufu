@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Involved — Join the #ABetterAbuja Movement | Aisha4Senate</title>
+  <meta name="description" content="Volunteer, become a ward champion, host a house party, donate, or spread the word. Every action counts. Join the movement for A Better Abuja.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .gi-hero { background: var(--green-deep); padding: 120px 0 80px; text-align: center; position: relative; overflow: hidden; }
+    .gi-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 40%, rgba(237,131,14,.12) 0%, transparent 65%); }
+    .gi-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem,6vw,4.5rem); color: var(--cream); line-height: 1.1; margin-bottom: 1rem; }
+    .gi-hero h1 span { color: var(--gold); }
+    .gi-hero p { color: rgba(247,242,234,.75); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2.5rem; }
+
+    /* Ways grid */
+    .ways-section { background: var(--cream); padding: 80px 0; }
+    .ways-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .way-card { background: #fff; border: 2px solid rgba(42,43,129,.08); border-radius: 4px; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+    .way-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(42,43,129,.12); }
+    .way-card-head { background: var(--green-deep); padding: 2rem; display: flex; align-items: center; gap: 1rem; }
+    .way-icon { font-size: 2.5rem; }
+    .way-title { color: var(--cream); font-family: var(--font-display); font-size: 1.3rem; }
+    .way-sub { color: rgba(247,242,234,.6); font-size: .85rem; font-family: var(--font-mono); }
+    .way-body { padding: 2rem; }
+    .way-body p { color: #555; font-size: .95rem; line-height: 1.7; margin-bottom: 1rem; }
+    .way-list { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+    .way-list li { padding: .35rem 0 .35rem 1.5rem; position: relative; font-size: .9rem; color: #444; }
+    .way-list li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: .85rem; }
+    .way-cta { display: inline-block; background: var(--green-deep); color: var(--gold); padding: .75rem 1.5rem; border-radius: 2px; font-family: var(--font-mono); font-size: .85rem; text-decoration: none; transition: background .2s; text-transform: uppercase; letter-spacing: .05em; }
+    .way-cta:hover { background: var(--gold); color: var(--green-deep); }
+    .way-cta.gold { background: var(--gold); color: var(--green-deep); }
+    .way-cta.gold:hover { background: #b8911e; color: #fff; }
+
+    /* Impact counters */
+    .gi-counters { background: var(--green-deep); padding: 70px 0; }
+    .gi-counters-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 2rem; text-align: center; }
+    .gi-counter-item .num { font-family: var(--font-display); font-size: 3rem; color: var(--gold); display: block; }
+    .gi-counter-item .lbl { font-family: var(--font-mono); font-size: .75rem; color: rgba(247,242,234,.6); text-transform: uppercase; letter-spacing: .06em; }
+
+    /* Volunteer Form */
+    .form-section { background: #fff; padding: 80px 0; }
+    .form-wrapper { max-width: 760px; margin: 0 auto; background: var(--cream); border-radius: 4px; padding: 3rem; border: 1px solid rgba(42,43,129,.1); }
+    .form-title { font-family: var(--font-display); font-size: 2rem; color: var(--green-deep); margin-bottom: .5rem; }
+    .form-subtitle { color: #777; font-size: .95rem; margin-bottom: 2rem; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; font-family: var(--font-mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--green-deep); margin-bottom: .5rem; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: .85rem 1rem; border: 1.5px solid rgba(42,43,129,.2); border-radius: 2px; font-family: var(--font-body); font-size: .95rem; background: #fff; color: var(--near-black); transition: border-color .2s; box-sizing: border-box; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--green-deep); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: .5rem; }
+    .checkbox-item { display: flex; align-items: center; gap: .5rem; font-size: .9rem; color: #444; cursor: pointer; }
+    .checkbox-item input[type=checkbox] { accent-color: var(--green-deep); width: 1rem; height: 1rem; }
+    .form-submit { width: 100%; padding: 1.1rem; background: var(--green-deep); color: var(--gold); border: none; border-radius: 2px; font-family: var(--font-mono); font-size: 1rem; text-transform: uppercase; letter-spacing: .08em; cursor: pointer; transition: background .2s; margin-top: 1rem; }
+    .form-submit:hover { background: var(--gold); color: var(--green-deep); }
+    .form-success { display: none; text-align: center; padding: 3rem; }
+    .form-success h3 { font-family: var(--font-display); font-size: 2rem; color: var(--green-deep); }
+
+    /* Testimonials */
+    .testimonials-section { background: var(--cream); padding: 80px 0; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .testimonial-card { background: #fff; padding: 2rem; border-radius: 4px; border-left: 4px solid var(--gold); }
+    .testimonial-quote { font-size: 1.05rem; color: #333; line-height: 1.7; margin-bottom: 1rem; font-style: italic; }
+    .testimonial-author { font-family: var(--font-mono); font-size: .8rem; color: var(--green-deep); text-transform: uppercase; }
+
+    /* Final CTA */
+    .gi-final { background: var(--green-deep); padding: 80px 0; text-align: center; position: relative; overflow: hidden; }
+    .gi-final::before { content: '#ABetterAbuja'; position: absolute; font-family: var(--font-display); font-size: clamp(3rem,12vw,10rem); color: rgba(255,255,255,.03); white-space: nowrap; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+    .gi-final h2 { font-family: var(--font-display); font-size: clamp(2rem,5vw,3.5rem); color: var(--cream); margin-bottom: 1rem; }
+    .gi-final h2 span { color: var(--gold); }
+    .gi-final p { color: rgba(247,242,234,.7); max-width: 600px; margin: 0 auto 2.5rem; font-size: 1.05rem; line-height: 1.7; }
+
+    @media(max-width:768px) { .form-row { grid-template-columns: 1fr; } .form-wrapper { padding: 2rem 1.25rem; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo"><img src="/images/aisha-logo.png" alt="Aisha4Senate" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="nav-logo-text" style="display:none">AISHA<span>4</span>SENATE</span></a>
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="agenda.html">Agenda</a>
+      <a href="contrast.html">The Contrast</a>
+      <a href="area-councils.html">Area Councils</a>
+      <a href="events.html">Events</a>
+      <a href="media.html">Media</a>
+      <a href="faq.html">FAQ</a>
+      <a href="get-involved.html" class="nav-cta" style="background:var(--gold);color:var(--green-deep)">Get Involved</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile">
+  <a href="about.html">About</a><a href="agenda.html">Agenda</a><a href="contrast.html">The Contrast</a>
+  <a href="area-councils.html">Area Councils</a><a href="events.html">Events</a>
+  <a href="media.html">Media</a><a href="faq.html">FAQ</a><a href="get-involved.html" style="color:var(--gold)">Get Involved →</a>
+</div>
+
+<!-- HERO -->
+<section class="gi-hero">
+  <div class="container">
+    <div class="hero-badge">100,000 Volunteers · 62 Wards · One Movement</div>
+    <h1>Join the<br><span>#ABetterAbuja</span><br>Movement</h1>
+    <p>Every voice matters. Every action counts. Whether you can give 1 hour a week or 40 — whether you're in Maitama or Kwali — there is a place for you in this movement.</p>
+    <a href="#volunteer-form" class="btn btn-gold">Volunteer Now</a>
+  </div>
+</section>
+
+<!-- IMPACT COUNTERS -->
+<section class="gi-counters">
+  <div class="container">
+    <div class="gi-counters-grid">
+      <div class="gi-counter-item"><span class="num counter" data-target="4800">0</span><span class="lbl">Volunteers Registered</span></div>
+      <div class="gi-counter-item"><span class="num counter" data-target="38">0</span><span class="lbl">Ward Champions Active</span></div>
+      <div class="gi-counter-item"><span class="num counter" data-target="127">0</span><span class="lbl">House Parties Hosted</span></div>
+      <div class="gi-counter-item"><span class="num counter" data-target="12400">0</span><span class="lbl">Voters Registered</span></div>
+      <div class="gi-counter-item"><span class="num counter" data-target="89">0</span><span class="lbl">Events Organized</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 WAYS -->
+<section class="ways-section">
+  <div class="container">
+    <div class="section-label reveal">6 WAYS TO JOIN</div>
+    <h2 class="section-title reveal">Find Your Role in<br>This Movement</h2>
+    <div class="ways-grid">
+
+      <div class="way-card reveal">
+        <div class="way-card-head">
+          <div class="way-icon">🙋</div>
+          <div>
+            <div class="way-title">Become a Volunteer</div>
+            <div class="way-sub">Join the 100,000-strong army</div>
+          </div>
+        </div>
+        <div class="way-body">
+          <p>We're building an army across all 62 wards of the FCT. From knocking on doors to registering voters, from organizing town halls to spreading the message — we need you.</p>
+          <ul class="way-list">
+            <li>Door-to-door canvassing in your ward</li>
+            <li>Voter registration drives</li>
+            <li>Social media amplification</li>
+            <li>Poll monitoring on election day</li>
+            <li>Weekend Warrior (2-4 hrs) or Full-Time Champion (10+ hrs)</li>
+          </ul>
+          <a href="#volunteer-form" class="way-cta">Sign Up as Volunteer</a>
+        </div>
+      </div>
+
+      <div class="way-card reveal">
+        <div class="way-card-head">
+          <div class="way-icon">👑</div>
+          <div>
+            <div class="way-title">Ward Champion</div>
+            <div class="way-sub">Lead your community</div>
+          </div>
+        </div>
+        <div class="way-body">
+          <p>Ward Champions are the backbone of our grassroots strategy. Lead volunteer teams in your ward, organize local events, and bridge campaign to community.</p>
+          <ul class="way-list">
+            <li>Recruit & coordinate 10-20 ward volunteers</li>
+            <li>Organize weekly meetings</li>
+            <li>Primary contact for residents in your ward</li>
+            <li>5+ hours/week commitment</li>
+            <li>Must be a resident of your ward</li>
+          </ul>
+          <a href="#volunteer-form" class="way-cta">Apply as Ward Champion</a>
+        </div>
+      </div>
+
+      <div class="way-card reveal">
+        <div class="way-card-head">
+          <div class="way-icon">🏠</div>
+          <div>
+            <div class="way-title">Host a House Party</div>
+            <div class="way-sub">Bring the movement home</div>
+          </div>
+        </div>
+        <div class="way-body">
+          <p>Invite 10–20 friends, neighbors, or colleagues to your home for an informal A Better Abuja conversation. One of the most effective grassroots tools we have.</p>
+          <ul class="way-list">
+            <li>We provide all campaign materials</li>
+            <li>Video content featuring Aisha</li>
+            <li>Snacks budget support for parties of 15+</li>
+            <li>Register your date and get materials in 3 days</li>
+          </ul>
+          <a href="#volunteer-form" class="way-cta">Register a House Party</a>
+        </div>
+      </div>
+
+      <div class="way-card reveal">
+        <div class="way-card-head">
+          <div class="way-icon">💻</div>
+          <div>
+            <div class="way-title">Specialized Team</div>
+            <div class="way-sub">Use your professional skills</div>
+          </div>
+        </div>
+        <div class="way-body">
+          <p>Use your professional expertise. We have openings across digital, research, legal, creative, and communications teams.</p>
+          <ul class="way-list">
+            <li>Digital Team: social media, graphics, video, web</li>
+            <li>Research Team: policy analysis, fact-checking</li>
+            <li>Legal Team: electoral law, voter rights, monitoring</li>
+            <li>Communications: writing, media, press</li>
+            <li>Logistics: events, transport, coordination</li>
+          </ul>
+          <a href="#volunteer-form" class="way-cta">Join a Specialized Team</a>
+        </div>
+      </div>
+
+      <div class="way-card reveal">
+        <div class="way-card-head" style="background:#1a2e1a">
+          <div class="way-icon">💰</div>
+          <div>
+            <div class="way-title">Donate</div>
+            <div class="way-sub">Fund a people-powered campaign</div>
+          </div>
+        </div>
+        <div class="way-body">
+          <p>Unlike traditional politicians who rely on questionable funding, we're building a people-powered campaign funded by thousands of ordinary Nigerians.</p>
+          <ul class="way-list">
+            <li>₦5,000 → Campaign materials for 50 volunteers</li>
+            <li>₦10,000 → Sound system for one town hall</li>
+            <li>₦50,000 → Print 5,000 flyers and posters</li>
+            <li>₦100,000 → Organize a ward-level rally</li>
+            <li>Every kobo tracked and published</li>
+          </ul>
+          <a href="#" class="way-cta gold">Donate Now</a>
+        </div>
+      </div>
+
+      <div class="way-card reveal">
+        <div class="way-card-head">
+          <div class="way-icon">📢</div>
+          <div>
+            <div class="way-title">Spread the Word</div>
+            <div class="way-sub">Your voice is your power</div>
+          </div>
+        </div>
+        <div class="way-body">
+          <p>Simple actions with massive impact. No formal commitment required — just passion for A Better Abuja.</p>
+          <ul class="way-list">
+            <li>Share posts with #ABetterAbuja #Aisha4Senate</li>
+            <li>Change profile frame to campaign frame</li>
+            <li>Talk to 5 people this week about the campaign</li>
+            <li>Share in WhatsApp groups</li>
+            <li>Display campaign posters at your home or office</li>
+          </ul>
+          <a href="#" class="way-cta">Download Social Kit</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEER FORM -->
+<section class="form-section" id="volunteer-form">
+  <div class="container">
+    <div class="section-label reveal" style="text-align:center">JOIN THE MOVEMENT</div>
+    <h2 class="section-title reveal" style="text-align:center;margin-bottom:3rem">Sign Up as a Volunteer</h2>
+    <div class="form-wrapper reveal">
+      <div class="form-title">Volunteer Registration</div>
+      <div class="form-subtitle">Join the #Aisha4SenateFamily. Takes 3 minutes.</div>
+
+      <form id="volunteerForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" required placeholder="Your full name">
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" required placeholder="your@email.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" required placeholder="+234 xxx xxx xxxx">
+          </div>
+          <div class="form-group">
+            <label>WhatsApp Number</label>
+            <input type="tel" placeholder="Same as above or different">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Area Council *</label>
+            <select required>
+              <option value="">Select Area Council</option>
+              <option>AMAC (Abuja Municipal)</option>
+              <option>Bwari</option>
+              <option>Gwagwalada</option>
+              <option>Kuje</option>
+              <option>Kwali</option>
+              <option>Abaji</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ward / Community *</label>
+            <input type="text" required placeholder="Your specific ward">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Age Group</label>
+            <select>
+              <option>18–25</option>
+              <option>26–35</option>
+              <option>36–50</option>
+              <option>51+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Volunteer Role Interest</label>
+            <select>
+              <option>General Volunteer</option>
+              <option>Ward Champion</option>
+              <option>House Party Host</option>
+              <option>Specialized Team</option>
+              <option>Poll Monitor</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Availability (select all that apply)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox"> Weekday mornings</label>
+            <label class="checkbox-item"><input type="checkbox"> Weekday afternoons</label>
+            <label class="checkbox-item"><input type="checkbox"> Weekday evenings</label>
+            <label class="checkbox-item"><input type="checkbox"> Saturdays</label>
+            <label class="checkbox-item"><input type="checkbox"> Sundays</label>
+            <label class="checkbox-item"><input type="checkbox"> Full-time (10+ hrs/week)</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Skills & Interests (select all that apply)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox"> Door-to-door canvassing</label>
+            <label class="checkbox-item"><input type="checkbox"> Phone banking</label>
+            <label class="checkbox-item"><input type="checkbox"> Social media</label>
+            <label class="checkbox-item"><input type="checkbox"> Event planning</label>
+            <label class="checkbox-item"><input type="checkbox"> Graphic design</label>
+            <label class="checkbox-item"><input type="checkbox"> Video production</label>
+            <label class="checkbox-item"><input type="checkbox"> Writing / Content</label>
+            <label class="checkbox-item"><input type="checkbox"> I have a vehicle</label>
+            <label class="checkbox-item"><input type="checkbox"> Public speaking</label>
+            <label class="checkbox-item"><input type="checkbox"> Hosting house parties</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Why do you want to join the #Aisha4Senate movement?</label>
+          <textarea rows="4" placeholder="Tell us in your own words (200 words max)..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>How did you hear about us?</label>
+          <select>
+            <option>Social media</option>
+            <option>Friend / Family</option>
+            <option>Town hall event</option>
+            <option>News coverage</option>
+            <option>Website</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-item" style="font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep)"><input type="checkbox" required> I commit to respecting campaign guidelines and representing #ABetterAbuja positively in my community</label>
+        </div>
+
+        <button type="submit" class="form-submit">Join the #Aisha4SenateFamily →</button>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div style="font-size:3rem">🎉</div>
+        <h3>Welcome to the Movement!</h3>
+        <p>You're now part of the #Aisha4SenateFamily. Expect a WhatsApp message within 48 hours with your volunteer orientation details.</p>
+        <p style="color:var(--green-deep);font-family:var(--font-mono);font-size:.9rem">#ABetterAbuja begins with YOU.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-label reveal">WHY THEY JOINED</div>
+    <h2 class="section-title reveal">Voices of the Movement</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote">"I joined because for once, someone is talking about Kwali. We've been forgotten for too long. Aisha sees us. She hears us. I'm fighting to make sure she represents us."</div>
+        <div class="testimonial-author">Blessing O. — Kwali Ward Champion</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote">"I've never been involved in politics. But the #ABetterAbuja message spoke to me. This isn't about politicians — it's about us taking power back. I'm in."</div>
+        <div class="testimonial-author">Chidi A. — AMAC Volunteer</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote">"I hosted a house party with 15 friends. By the end, all 15 signed up to volunteer. When people hear Aisha's story, they can't help but join."</div>
+        <div class="testimonial-author">Fatima M. — Bwari House Party Host</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="gi-final">
+  <div class="container">
+    <div class="section-label" style="color:rgba(237,131,14,.5)">YOUR PARTICIPATION IS YOUR POWER</div>
+    <h2 class="reveal">A Better Abuja Won't<br><span>Build Itself</span></h2>
+    <p class="reveal">We need 100,000 committed volunteers to win in 2027. Whether you give us 1 hour or 40, donate ₦1,000 or ₦1,000,000, whether you're in Maitama or Abaji — you matter. Use your power.</p>
+    <div class="btn-group reveal">
+      <a href="#volunteer-form" class="btn btn-gold">Volunteer Now</a>
+      <a href="#" class="btn" style="border:1px solid rgba(247,242,234,.3);color:var(--cream)">Donate →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">AISHA<span>4</span>SENATE</div>
+        <p class="tagline">A Better Abuja — For All Of Us.<br>FCT Senate 2027 · NDC</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Twitter">𝕏</a>
+          <a href="#" class="footer-social" aria-label="Facebook">f</a>
+          <a href="#" class="footer-social" aria-label="Instagram">▣</a>
+          <a href="#" class="footer-social" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Quick Links</h4><ul>
+        <li><a href="about.html">About Aisha</a></li><li><a href="agenda.html">The 7 Pillars</a></li>
+        <li><a href="area-councils.html">Area Councils</a></li><li><a href="events.html">Events</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul>
+        <li><a href="media.html">Media Center</a></li><li><a href="faq.html">FAQ</a></li>
+        <li><a href="contrast.html">The Contrast</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item"><div><strong>Email</strong>media@aisha4senate.ng</div></div>
+        <div class="footer-contact-item"><div><strong>Phone</strong>+234 803 357 9711</div></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024–2027 Aisha Yesufu for Senate Campaign. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  document.getElementById('volunteerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+
+    // Collect checkboxes
+    const availability = Array.from(this.querySelectorAll('input[type=checkbox]:checked'))
+      .filter(c => c.closest('.form-group') && c.closest('.form-group').querySelector('label')?.textContent.includes('Availability') ||
+                   ['Weekday mornings','Weekday afternoons','Weekday evenings','Saturdays','Sundays','Full-time 10+hrs'].includes(c.parentElement.textContent.trim()))
+      .map(c => c.parentElement.textContent.trim());
+
+    const skills = Array.from(this.querySelectorAll('input[type=checkbox]:checked'))
+      .filter(c => ['Canvassing','Phone banking','Social media','Event planning','Graphic design',
+                    'Video production','Writing/Content','Has a vehicle','Public speaking','House party hosting',
+                    'Door-to-door canvassing'].some(s => c.parentElement.textContent.includes(s.split('/')[0])))
+      .map(c => c.parentElement.textContent.trim());
+
+    const inputs = this.querySelectorAll('input[type=text], input[type=email], input[type=tel]');
+    const selects = this.querySelectorAll('select');
+
+    const payload = {
+      fullName:       inputs[0]?.value || '',
+      email:          inputs[1]?.value || '',
+      phone:          inputs[2]?.value || '',
+      whatsapp:       inputs[3]?.value || '',
+      areaCouncil:    selects[0]?.value || '',
+      ward:           inputs[4]?.value || '',
+      ageGroup:       selects[1]?.value || '',
+      volunteerRole:  selects[2]?.value || '',
+      availability,
+      skills,
+      whyJoining:     this.querySelector('textarea')?.value || '',
+      howHeard:       selects[3]?.value || ''
+    };
+
+    try {
+      const res = await fetch('/api/volunteer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        this.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+        window.scrollTo({ top: document.getElementById('formSuccess').offsetTop - 100, behavior: 'smooth' });
+      } else {
+        btn.textContent = 'Error — Please Try Again';
+        btn.style.background = 'var(--red)';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Network Error — Please Try Again';
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

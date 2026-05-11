@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Six Area Councils — Every Council Matters | Aisha4Senate</title>
+  <meta name="description" content="From AMAC to Abaji, Bwari to Kwali—see how the Seven Pillars agenda will transform each of the six FCT area councils with specific solutions.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .councils-hero { background: var(--green-deep); padding: 120px 0 80px; text-align: center; position: relative; overflow: hidden; }
+    .councils-hero::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(237,131,14,.03) 40px, rgba(237,131,14,.03) 41px); }
+    .councils-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem,6vw,4.5rem); color: var(--cream); line-height: 1.1; margin-bottom: 1rem; }
+    .councils-hero h1 span { color: var(--gold); }
+    .councils-hero p { color: rgba(247,242,234,.75); font-size: 1.15rem; max-width: 620px; margin: 0 auto 2rem; }
+
+    /* Overview grid */
+    .councils-overview { background: var(--cream); padding: 80px 0; }
+    .overview-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.5rem; }
+    .overview-card { background: #fff; border: 2px solid rgba(42,43,129,.08); border-radius: 4px; padding: 2rem; cursor: pointer; transition: transform .2s, box-shadow .2s, border-color .2s; }
+    .overview-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(42,43,129,.12); border-color: var(--gold); }
+    .overview-card .oc-name { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-deep); margin-bottom: .5rem; }
+    .overview-card .oc-pop { font-size: .85rem; color: var(--gold); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 1rem; }
+    .overview-card .oc-priority { font-size: .9rem; color: #555; line-height: 1.6; }
+    .overview-card .oc-impact { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(42,43,129,.1); font-size: .85rem; font-family: var(--font-mono); color: var(--green-deep); }
+
+    /* Individual council sections */
+    .council-section { padding: 80px 0; border-bottom: 1px solid rgba(42,43,129,.1); }
+    .council-section:nth-child(even) { background: var(--cream); }
+    .council-section:nth-child(odd) { background: #fff; }
+    .council-header { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 2rem; margin-bottom: 3rem; }
+    .council-name { font-family: var(--font-display); font-size: clamp(2rem,4vw,3.5rem); color: var(--green-deep); line-height: 1; }
+    .council-name span { color: var(--gold); }
+    .council-stats-badge { text-align: right; }
+    .stat-pill { display: inline-block; background: var(--green-deep); color: var(--gold); padding: .4rem 1rem; border-radius: 2rem; font-family: var(--font-mono); font-size: .8rem; margin: .2rem; }
+    .council-label { font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(42,43,129,.5); margin-bottom: .5rem; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .problems-box { background: #fff3f3; border-left: 4px solid #c0392b; padding: 1.5rem; border-radius: 0 4px 4px 0; }
+    .problems-box h4 { color: #c0392b; font-family: var(--font-mono); font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1rem; }
+    .problems-box ul { list-style: none; padding: 0; }
+    .problems-box ul li { padding: .4rem 0; font-size: .95rem; color: #333; padding-left: 1.2rem; position: relative; }
+    .problems-box ul li::before { content: '✗'; position: absolute; left: 0; color: #c0392b; font-size: .8rem; top: .5rem; }
+
+    .solutions-box { background: #f0fff4; border-left: 4px solid var(--green-deep); padding: 1.5rem; border-radius: 0 4px 4px 0; }
+    .solutions-box h4 { color: var(--green-deep); font-family: var(--font-mono); font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1rem; }
+    .solution-item { margin-bottom: 1.2rem; }
+    .solution-item strong { display: block; font-size: .85rem; color: var(--green-deep); text-transform: uppercase; font-family: var(--font-mono); letter-spacing: .05em; }
+    .solution-item p { font-size: .9rem; color: #444; margin: .3rem 0; }
+    .solution-item .impact { font-size: .8rem; color: var(--gold); font-family: var(--font-mono); }
+
+    .impact-strip { background: var(--green-deep); padding: 2rem; border-radius: 4px; margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 1.5rem; }
+    .impact-item { text-align: center; }
+    .impact-item .num { font-family: var(--font-display); font-size: 2rem; color: var(--gold); display: block; }
+    .impact-item .lbl { font-family: var(--font-mono); font-size: .75rem; color: rgba(247,242,234,.7); text-transform: uppercase; letter-spacing: .05em; }
+
+    .council-quote { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-deep); border-left: 4px solid var(--gold); padding: 1.5rem 2rem; margin: 2rem 0; background: rgba(237,131,14,.06); font-style: italic; }
+
+    /* Comparison table */
+    .compare-section { background: var(--green-deep); padding: 80px 0; }
+    .compare-table { width: 100%; border-collapse: collapse; }
+    .compare-table th { background: rgba(255,255,255,.08); color: var(--gold); font-family: var(--font-mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; padding: 1rem; text-align: left; border-bottom: 2px solid var(--gold); }
+    .compare-table td { color: var(--cream); padding: 1rem; border-bottom: 1px solid rgba(255,255,255,.1); font-size: .9rem; }
+    .compare-table tr:hover td { background: rgba(255,255,255,.04); }
+    .compare-table .highlight { color: var(--gold); font-family: var(--font-mono); }
+
+    /* Final CTA */
+    .councils-cta { background: var(--cream); padding: 80px 0; text-align: center; }
+    .councils-cta h2 { font-family: var(--font-display); font-size: clamp(2rem,4vw,3rem); color: var(--green-deep); margin-bottom: 1rem; }
+    .councils-cta p { color: #555; max-width: 580px; margin: 0 auto 2rem; line-height: 1.7; font-size: 1.05rem; }
+
+    @media(max-width:768px) {
+      .two-col { grid-template-columns: 1fr; }
+      .council-header { grid-template-columns: 1fr; }
+      .council-stats-badge { text-align: left; }
+      .impact-strip { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo"><img src="/images/aisha-logo.png" alt="Aisha4Senate" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="nav-logo-text" style="display:none">AISHA<span>4</span>SENATE</span></a>
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="agenda.html">Agenda</a>
+      <a href="contrast.html">The Contrast</a>
+      <a href="area-councils.html" style="color:var(--gold)">Area Councils</a>
+      <a href="events.html">Events</a>
+      <a href="media.html">Media</a>
+      <a href="faq.html">FAQ</a>
+      <a href="get-involved.html" class="nav-cta">Get Involved</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile">
+  <a href="about.html">About</a><a href="agenda.html">Agenda</a><a href="contrast.html">The Contrast</a>
+  <a href="area-councils.html" style="color:var(--gold)">Area Councils</a><a href="events.html">Events</a>
+  <a href="media.html">Media</a><a href="faq.html">FAQ</a><a href="get-involved.html" style="color:var(--gold)">Get Involved →</a>
+</div>
+
+<!-- HERO -->
+<section class="councils-hero">
+  <div class="container">
+    <div class="hero-badge">6 Councils · 62 Wards · 3.5 Million Residents</div>
+    <h1>The Six Area Councils<br>of <span>A Better Abuja</span></h1>
+    <p>From AMAC to Abaji, from Bwari to Kwali — here's how the Seven Pillars agenda will transform each area council. Every council matters. Every ward counts. Every resident deserves better.</p>
+    <a href="get-involved.html" class="btn btn-gold">Join The Movement</a>
+  </div>
+</section>
+
+<!-- OVERVIEW GRID -->
+<section class="councils-overview">
+  <div class="container">
+    <div class="section-label reveal">ALL SIX COUNCILS AT A GLANCE</div>
+    <h2 class="section-title reveal" style="margin-bottom:3rem;">Every Council Has A Voice</h2>
+    <div class="overview-grid">
+      <a href="#amac" class="overview-card reveal" style="text-decoration:none">
+        <div class="oc-name">AMAC</div>
+        <div class="oc-pop">1.8M residents · 11 wards</div>
+        <div class="oc-priority">Urban safety, rent control, and transport transformation — Light Rail to Nyanya, Karu, Kubwa, Lugbe.</div>
+        <div class="oc-impact">→ 800,000+ residents directly impacted</div>
+      </a>
+      <a href="#bwari" class="overview-card reveal" style="text-decoration:none">
+        <div class="oc-name">Bwari</div>
+        <div class="oc-pop">350K residents · 10 wards</div>
+        <div class="oc-priority">Clean water, all-season roads, and healthcare for both urban Kubwa and rural communities.</div>
+        <div class="oc-impact">→ 200,000+ with first-time water access</div>
+      </a>
+      <a href="#gwagwalada" class="overview-card reveal" style="text-decoration:none">
+        <div class="oc-name">Gwagwalada</div>
+        <div class="oc-pop">300K residents · 10 wards</div>
+        <div class="oc-priority">Healthcare overhaul, road rehabilitation, and youth employment leveraging university partnerships.</div>
+        <div class="oc-impact">→ 50% reduction in maternal deaths</div>
+      </a>
+      <a href="#kuje" class="overview-card reveal" style="text-decoration:none">
+        <div class="oc-name">Kuje</div>
+        <div class="oc-pop">250K residents · 10 wards</div>
+        <div class="oc-priority">Security restoration, infrastructure investment, and agricultural economic revival.</div>
+        <div class="oc-impact">→ 8,000+ jobs created</div>
+      </a>
+      <a href="#kwali" class="overview-card reveal" style="text-decoration:none">
+        <div class="oc-name">Kwali</div>
+        <div class="oc-pop">200K residents · 11 wards</div>
+        <div class="oc-priority">Most neglected council. Emergency water, roads built from scratch, and indigenous justice for Gbagyi people.</div>
+        <div class="oc-impact">→ Complete transformation from neglect</div>
+      </a>
+      <a href="#abaji" class="overview-card reveal" style="text-decoration:none">
+        <div class="oc-name">Abaji</div>
+        <div class="oc-pop">180K residents · 10 wards</div>
+        <div class="oc-priority">End isolation. Unlock agricultural potential. Build roads, healthcare, and schools from zero.</div>
+        <div class="oc-impact">→ FCT's agricultural powerhouse</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- AMAC -->
+<section class="council-section" id="amac">
+  <div class="container">
+    <div class="council-header">
+      <div>
+        <div class="council-label">Area Council 01</div>
+        <div class="council-name">AMAC<br><span>Abuja Municipal</span></div>
+      </div>
+      <div class="council-stats-badge">
+        <span class="stat-pill">1.8M Residents</span>
+        <span class="stat-pill">11 Wards</span>
+        <span class="stat-pill">Most Populated</span>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="problems-box reveal">
+        <h4>The Problems Now</h4>
+        <ul>
+          <li>3-hour daily commutes from Nyanya to city centre</li>
+          <li>Rent in Kubwa now costs what Wuse cost 5 years ago</li>
+          <li>"One chance" robberies rampant on Nyanya-Karu, Kubwa, Lugbe routes</li>
+          <li>Public hospitals overwhelmed, schools overcrowded</li>
+          <li>Water supply erratic in satellite areas like Karshi, Orozo</li>
+        </ul>
+      </div>
+      <div class="solutions-box reveal">
+        <h4>A Better Abuja Solutions</h4>
+        <div class="solution-item">
+          <strong>Security</strong>
+          <p>Community policing + CCTV on Nyanya-Karu, Kubwa Expressway. Solar streetlights. Rapid response units.</p>
+          <div class="impact">→ 70% fewer "one chance" incidents</div>
+        </div>
+        <div class="solution-item">
+          <strong>Infrastructure</strong>
+          <p>Light Rail expansion to Nyanya, Karu, Lugbe, Kubwa. Road rehabilitation. 150,000+ with clean water.</p>
+          <div class="impact">→ Commute times cut 50%</div>
+        </div>
+        <div class="solution-item">
+          <strong>Economy</strong>
+          <p>Rent Control Bill capping increases at 10%. 15,000 scholarships. 20,000 youth trained in digital skills.</p>
+          <div class="impact">→ 15,000+ jobs created</div>
+        </div>
+      </div>
+    </div>
+    <div class="impact-strip reveal">
+      <div class="impact-item"><span class="num">800K+</span><span class="lbl">Residents Impacted</span></div>
+      <div class="impact-item"><span class="num">50%</span><span class="lbl">Commute Time Cut</span></div>
+      <div class="impact-item"><span class="num">50%</span><span class="lbl">Fewer Crime Incidents</span></div>
+      <div class="impact-item"><span class="num">40%</span><span class="lbl">Drop in Rent Hikes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BWARI -->
+<section class="council-section" id="bwari">
+  <div class="container">
+    <div class="council-header">
+      <div>
+        <div class="council-label">Area Council 02</div>
+        <div class="council-name">Bwari<br><span>Urban & Rural</span></div>
+      </div>
+      <div class="council-stats-badge">
+        <span class="stat-pill">350K Residents</span>
+        <span class="stat-pill">10 Wards</span>
+        <span class="stat-pill">Water Crisis</span>
+      </div>
+    </div>
+    <div class="council-quote reveal">"Women in Kubwa Extension, Ushafa, Dutse walk over a kilometre for water every single day. This is Nigeria's capital city."</div>
+    <div class="two-col">
+      <div class="problems-box reveal">
+        <h4>The Problems Now</h4>
+        <ul>
+          <li>No piped water in most communities — women walk 1+ km daily</li>
+          <li>Roads in Ushafa, Dutse impassable during rainy season</li>
+          <li>Bandits operating in rural communities</li>
+          <li>Hospitals lack basic equipment, rural areas have zero healthcare</li>
+          <li>Maternal deaths from preventable causes</li>
+        </ul>
+      </div>
+      <div class="solutions-box reveal">
+        <h4>A Better Abuja Solutions</h4>
+        <div class="solution-item">
+          <strong>Water (Priority #1)</strong>
+          <p>30+ solar-powered boreholes. 100,000+ residents with clean water for the first time.</p>
+          <div class="impact">→ Clean water within 200m of every home</div>
+        </div>
+        <div class="solution-item">
+          <strong>Roads</strong>
+          <p>Complete rehabilitation of Kubwa, Dutse, Ushafa, Dutse-Alhaji roads. Drainage to prevent flooding.</p>
+          <div class="impact">→ Passable roads year-round</div>
+        </div>
+        <div class="solution-item">
+          <strong>Land Rights</strong>
+          <p>Protection for indigenous Gbagyi communities. Fair compensation. Land Rights Tribunal.</p>
+          <div class="impact">→ Justice for indigenous people</div>
+        </div>
+      </div>
+    </div>
+    <div class="impact-strip reveal">
+      <div class="impact-item"><span class="num">200K+</span><span class="lbl">With Clean Water</span></div>
+      <div class="impact-item"><span class="num">80%</span><span class="lbl">Road Improvement</span></div>
+      <div class="impact-item"><span class="num">60%</span><span class="lbl">Less Maternal Mortality</span></div>
+      <div class="impact-item"><span class="num">10K+</span><span class="lbl">Students in Better Schools</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GWAGWALADA -->
+<section class="council-section" id="gwagwalada">
+  <div class="container">
+    <div class="council-header">
+      <div>
+        <div class="council-label">Area Council 03</div>
+        <div class="council-name">Gwagwalada<br><span>University Town</span></div>
+      </div>
+      <div class="council-stats-badge">
+        <span class="stat-pill">300K Residents</span>
+        <span class="stat-pill">10 Wards</span>
+        <span class="stat-pill">Healthcare Crisis</span>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="problems-box reveal">
+        <h4>The Problems Now</h4>
+        <ul>
+          <li>Gwagwalada Main Hospital overwhelmed, no functional PHCs in rural areas</li>
+          <li>Women die in childbirth from preventable causes</li>
+          <li>Roads to surrounding villages are death traps</li>
+          <li>Most villages have no clean water</li>
+          <li>Sky-high youth unemployment despite university proximity</li>
+        </ul>
+      </div>
+      <div class="solutions-box reveal">
+        <h4>A Better Abuja Solutions</h4>
+        <div class="solution-item">
+          <strong>Healthcare (Priority #1)</strong>
+          <p>10+ PHCs equipped and operational. Mobile clinics weekly. Free maternal care for 25,000+ women. University of Abuja Teaching Hospital partnership.</p>
+          <div class="impact">→ 70% reduction in maternal deaths</div>
+        </div>
+        <div class="solution-item">
+          <strong>Youth Employment</strong>
+          <p>15,000 youth trained via university partnerships. 3,000 micro-loans. University-community entrepreneurship programs.</p>
+          <div class="impact">→ 12,000+ jobs, youth unemployment halved</div>
+        </div>
+        <div class="solution-item">
+          <strong>Infrastructure</strong>
+          <p>Major road rehabilitation. 40+ boreholes. 80,000+ residents with clean water.</p>
+          <div class="impact">→ All-season access, clean water for all</div>
+        </div>
+      </div>
+    </div>
+    <div class="impact-strip reveal">
+      <div class="impact-item"><span class="num">150K+</span><span class="lbl">Improved Healthcare</span></div>
+      <div class="impact-item"><span class="num">50%</span><span class="lbl">Fewer Maternal Deaths</span></div>
+      <div class="impact-item"><span class="num">10K+</span><span class="lbl">Jobs Created</span></div>
+      <div class="impact-item"><span class="num">80K</span><span class="lbl">With Clean Water</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- KUJE -->
+<section class="council-section" id="kuje">
+  <div class="container">
+    <div class="council-header">
+      <div>
+        <div class="council-label">Area Council 04</div>
+        <div class="council-name">Kuje<br><span>Agricultural Potential</span></div>
+      </div>
+      <div class="council-stats-badge">
+        <span class="stat-pill">250K Residents</span>
+        <span class="stat-pill">10 Wards</span>
+        <span class="stat-pill">Security Focus</span>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="problems-box reveal">
+        <h4>The Problems Now</h4>
+        <ul>
+          <li>Security anxiety from Kuje Prison proximity; communities feel unsafe</li>
+          <li>Bad roads isolate communities from markets and services</li>
+          <li>No clean water in most villages</li>
+          <li>Healthcare non-existent in rural areas</li>
+          <li>Agricultural potential unrealized — crops spoil, youth leave</li>
+        </ul>
+      </div>
+      <div class="solutions-box reveal">
+        <h4>A Better Abuja Solutions</h4>
+        <div class="solution-item">
+          <strong>Security (Priority #1)</strong>
+          <p>Enhanced security protocols around prison area. Community policing all 10 wards. Solar streetlights. Rapid response teams.</p>
+          <div class="impact">→ 60% drop in incidents, 40% improved perception</div>
+        </div>
+        <div class="solution-item">
+          <strong>Agricultural Economy</strong>
+          <p>Farm-to-market roads, equipment support, modern farming training for 12,000 youth. Market infrastructure.</p>
+          <div class="impact">→ Agricultural productivity doubles, 8,000+ jobs</div>
+        </div>
+        <div class="solution-item">
+          <strong>Infrastructure</strong>
+          <p>Complete road network rehabilitation. 35+ boreholes. 70,000+ residents with clean water. 8+ PHCs fully operational.</p>
+          <div class="impact">→ All communities accessible year-round</div>
+        </div>
+      </div>
+    </div>
+    <div class="impact-strip reveal">
+      <div class="impact-item"><span class="num">120K+</span><span class="lbl">With Basic Amenities</span></div>
+      <div class="impact-item"><span class="num">60%</span><span class="lbl">Crime Reduction</span></div>
+      <div class="impact-item"><span class="num">8K+</span><span class="lbl">Agricultural Jobs</span></div>
+      <div class="impact-item"><span class="num">70K</span><span class="lbl">With Clean Water</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- KWALI -->
+<section class="council-section" id="kwali" style="background: var(--green-deep)!important;">
+  <div class="container">
+    <div class="council-header">
+      <div>
+        <div class="council-label" style="color:rgba(237,131,14,.6)">Area Council 05 — The Forgotten One</div>
+        <div class="council-name" style="color:var(--cream)">Kwali<br><span>Gbagyi Homeland</span></div>
+      </div>
+      <div class="council-stats-badge">
+        <span class="stat-pill">200K Residents</span>
+        <span class="stat-pill">11 Wards</span>
+        <span class="stat-pill" style="background:rgba(237,131,14,.2);color:var(--gold);">Most Neglected</span>
+      </div>
+    </div>
+    <div class="council-quote" style="border-left-color:var(--gold);background:rgba(237,131,14,.1);color:var(--cream)">"Abuja's capital sits on Gbagyi land. Yet Kwali gets nothing. This ends in 2027."</div>
+    <div class="two-col">
+      <div class="problems-box reveal" style="background:rgba(192,57,43,.15);border-left-color:rgba(255,100,80,.6)">
+        <h4 style="color:rgba(255,120,100,.9)">The Problems Now</h4>
+        <ul style="color:rgba(247,242,234,.85)">
+          <li>Most neglected council — completely forgotten by government</li>
+          <li>Women walk 2+ km daily for water; children miss school to fetch water</li>
+          <li>No functional healthcare; women die in childbirth</li>
+          <li>Roads literally don't exist in most areas — communities cut off</li>
+          <li>Indigenous Gbagyi displaced without compensation</li>
+        </ul>
+      </div>
+      <div class="solutions-box reveal" style="background:rgba(0,100,30,.3);border-left-color:var(--gold)">
+        <h4 style="color:var(--gold)">A Better Abuja Solutions</h4>
+        <div class="solution-item">
+          <strong style="color:var(--gold)">Emergency Water (Priority #1)</strong>
+          <p style="color:rgba(247,242,234,.85)">50+ solar-powered boreholes — highest density in FCT. 60,000+ residents with clean water FOR THE FIRST TIME.</p>
+          <div class="impact">→ Basic dignity restored</div>
+        </div>
+        <div class="solution-item">
+          <strong style="color:var(--gold)">Land Rights — Justice At Last</strong>
+          <p style="color:rgba(247,242,234,.85)">Full compensation for ALL Gbagyi, Koro, Bassa, Gade land taken. Land Rights Tribunal with indigenous representation.</p>
+          <div class="impact">→ Historical injustice finally addressed</div>
+        </div>
+        <div class="solution-item">
+          <strong style="color:var(--gold)">Roads Built From Scratch</strong>
+          <p style="color:rgba(247,242,234,.85)">Not rehabilitation — actual road construction. Communities connected. Isolation ended.</p>
+          <div class="impact">→ Kwali joins A Better Abuja</div>
+        </div>
+      </div>
+    </div>
+    <div class="impact-strip" style="background:rgba(237,131,14,.15);border:1px solid rgba(237,131,14,.3)">
+      <div class="impact-item"><span class="num">100K+</span><span class="lbl">Basic Amenities (First Time)</span></div>
+      <div class="impact-item"><span class="num">60K+</span><span class="lbl">With Clean Water</span></div>
+      <div class="impact-item"><span class="num">Justice</span><span class="lbl">For Indigenous People</span></div>
+      <div class="impact-item"><span class="num">Zero</span><span class="lbl">Neglect After 2027</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABAJI -->
+<section class="council-section" id="abaji">
+  <div class="container">
+    <div class="council-header">
+      <div>
+        <div class="council-label">Area Council 06 — The Most Remote</div>
+        <div class="council-name">Abaji<br><span>FCT's Future Food Basket</span></div>
+      </div>
+      <div class="council-stats-badge">
+        <span class="stat-pill">180K Residents</span>
+        <span class="stat-pill">10 Wards</span>
+        <span class="stat-pill">Ending Isolation</span>
+      </div>
+    </div>
+    <div class="council-quote reveal">"Abaji is 2 hours from Abuja but might as well be in another country. Your distance will become your advantage — as FCT's agricultural powerhouse."</div>
+    <div class="two-col">
+      <div class="problems-box reveal">
+        <h4>The Problems Now</h4>
+        <ul>
+          <li>2 hours from Abuja, completely cut off — no roads, no infrastructure</li>
+          <li>Rich farmland but no support — crops spoil, potential wasted</li>
+          <li>No water. No healthcare. No functional schools.</li>
+          <li>Youth exodus — leaving for cities; communities dying slowly</li>
+        </ul>
+      </div>
+      <div class="solutions-box reveal">
+        <h4>A Better Abuja Solutions</h4>
+        <div class="solution-item">
+          <strong>End Isolation (Priority #1)</strong>
+          <p>Major road construction linking Abaji to Abuja. Agricultural transport routes. 50,000+ with clean water.</p>
+          <div class="impact">→ Isolation ends permanently</div>
+        </div>
+        <div class="solution-item">
+          <strong>Agricultural Revolution</strong>
+          <p>Modern equipment, cold storage, farm-to-market roads. 8,000 farmers trained. Cooperative formation support.</p>
+          <div class="impact">→ Agricultural productivity triples</div>
+        </div>
+        <div class="solution-item">
+          <strong>Healthcare & Education</strong>
+          <p>6+ PHCs built from scratch. Mobile clinics weekly. 20+ schools renovated. 4,000 scholarships.</p>
+          <div class="impact">→ Services where none existed before</div>
+        </div>
+      </div>
+    </div>
+    <div class="impact-strip reveal">
+      <div class="impact-item"><span class="num">90K+</span><span class="lbl">Improved Quality of Life</span></div>
+      <div class="impact-item"><span class="num">3×</span><span class="lbl">Agricultural Output</span></div>
+      <div class="impact-item"><span class="num">50K+</span><span class="lbl">With Clean Water</span></div>
+      <div class="impact-item"><span class="num">2K+</span><span class="lbl">Jobs in Agribusiness</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="compare-section">
+  <div class="container">
+    <div class="section-label" style="color:rgba(237,131,14,.5)">ALL SIX AT A GLANCE</div>
+    <h2 class="section-title" style="color:var(--cream);margin-bottom:3rem">The Full Picture</h2>
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Council</th>
+            <th>Population</th>
+            <th>Wards</th>
+            <th>Top Priority</th>
+            <th>Expected Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">AMAC</td><td>1.8M</td><td>11</td><td>Security + Transport</td><td>800K+ benefiting directly</td></tr>
+          <tr><td class="highlight">Bwari</td><td>350K</td><td>10</td><td>Water + Roads</td><td>200K+ with first-time water</td></tr>
+          <tr><td class="highlight">Gwagwalada</td><td>300K</td><td>10</td><td>Healthcare</td><td>50% maternal death reduction</td></tr>
+          <tr><td class="highlight">Kuje</td><td>250K</td><td>10</td><td>Security + Agriculture</td><td>8,000+ jobs created</td></tr>
+          <tr><td class="highlight">Kwali</td><td>200K</td><td>11</td><td>Everything (Most Neglected)</td><td>Complete transformation</td></tr>
+          <tr><td class="highlight">Abaji</td><td>180K</td><td>10</td><td>Infrastructure + Agriculture</td><td>Ending isolation forever</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="councils-cta">
+  <div class="container">
+    <div class="section-label reveal">EVERY COUNCIL. EVERY WARD. EVERY PERSON.</div>
+    <h2 class="reveal">A Better Abuja Is <span class="gold">For All Of Us</span></h2>
+    <p class="reveal">A Better Abuja isn't just for AMAC. It's for Kwali. For Abaji. For the woman walking 2 kilometres for water. For the farmer whose crops spoil because roads don't exist. For every resident who's been told they don't matter. <strong>You matter.</strong></p>
+    <div class="btn-group reveal">
+      <a href="get-involved.html" class="btn btn-green">Join The Movement</a>
+      <a href="agenda.html" class="btn btn-outline">See The Full Agenda</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">AISHA<span>4</span>SENATE</div>
+        <p class="tagline">A Better Abuja — For All Of Us.<br>A Voice Outside Becomes Power Inside.<br>FCT Senate 2027 · NDC</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Twitter">𝕏</a>
+          <a href="#" class="footer-social" aria-label="Facebook">f</a>
+          <a href="#" class="footer-social" aria-label="Instagram">▣</a>
+          <a href="#" class="footer-social" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About Aisha</a></li>
+          <li><a href="agenda.html">The 7 Pillars</a></li>
+          <li><a href="contrast.html">The Contrast</a></li>
+          <li><a href="area-councils.html">Area Councils</a></li>
+          <li><a href="get-involved.html">Join Movement</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="media.html">Media Center</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="media.html#press">Press Releases</a></li>
+          <li><a href="media.html#kit">Media Kit</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><div><strong>Email</strong>media@aisha4senate.ng</div></div>
+        <div class="footer-contact-item"><div><strong>Phone</strong>+234 803 357 9711</div></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024–2027 Aisha Yesufu for Senate Campaign. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

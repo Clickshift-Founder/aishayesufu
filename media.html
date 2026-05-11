@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Center — Press, Videos, Photos & Updates | Aisha4Senate</title>
+  <meta name="description" content="Official media center for Aisha Yesufu's FCT Senate campaign. Press releases, videos, photos, media kit, and campaign coverage.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .media-hero { background: var(--near-black); padding: 120px 0 80px; text-align: center; position: relative; overflow: hidden; }
+    .media-hero::before { content: 'MEDIA'; position: absolute; font-family: var(--font-display); font-size: clamp(8rem,20vw,18rem); color: rgba(255,255,255,.03); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; white-space: nowrap; }
+    .media-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem,6vw,4.5rem); color: var(--cream); line-height: 1.1; margin-bottom: 1rem; }
+    .media-hero h1 span { color: var(--gold); }
+    .media-hero p { color: rgba(247,242,234,.6); font-size: 1.05rem; max-width: 560px; margin: 0 auto 2.5rem; }
+
+    /* Media nav */
+    .media-nav { background: #fff; border-bottom: 1px solid rgba(42,43,129,.1); padding: 0; position: sticky; top: 70px; z-index: 90; }
+    .media-nav-inner { display: flex; gap: 0; overflow-x: auto; }
+    .media-nav a { padding: 1rem 1.5rem; font-family: var(--font-mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: #666; text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap; transition: color .2s, border-color .2s; }
+    .media-nav a:hover, .media-nav a.active { color: var(--green-deep); border-bottom-color: var(--gold); }
+
+    /* Press releases */
+    .press-section { background: var(--cream); padding: 80px 0; }
+    .press-grid { display: grid; gap: 1.5rem; margin-top: 3rem; }
+    .press-card { background: #fff; border-radius: 4px; padding: 2rem; border-left: 4px solid var(--green-deep); display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: start; transition: box-shadow .2s; }
+    .press-card:hover { box-shadow: 0 8px 32px rgba(42,43,129,.1); }
+    .press-date { font-family: var(--font-mono); font-size: .75rem; color: #999; white-space: nowrap; padding-top: .25rem; }
+    .press-badge { display: inline-block; padding: .25rem .75rem; border-radius: 2rem; font-family: var(--font-mono); font-size: .7rem; text-transform: uppercase; background: rgba(42,43,129,.08); color: var(--green-deep); margin-bottom: .75rem; }
+    .press-headline { font-family: var(--font-display); font-size: 1.2rem; color: var(--near-black); margin-bottom: .5rem; }
+    .press-excerpt { color: #666; font-size: .9rem; line-height: 1.6; }
+    .press-read { color: var(--gold); font-family: var(--font-mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; text-decoration: none; white-space: nowrap; border: 1px solid var(--gold); padding: .5rem 1rem; border-radius: 2px; transition: background .2s, color .2s; }
+    .press-read:hover { background: var(--gold); color: var(--green-deep); }
+
+    /* Video section */
+    .video-section { background: var(--near-black); padding: 80px 0; }
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .video-card { background: #1a1a1a; border-radius: 4px; overflow: hidden; cursor: pointer; transition: transform .2s; }
+    .video-card:hover { transform: translateY(-4px); }
+    .video-thumb { aspect-ratio: 16/9; background: #2a2a2a; position: relative; display: flex; align-items: center; justify-content: center; }
+    .video-thumb-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a3320 0%, #0b3d20 100%); opacity: .8; }
+    .video-play { width: 56px; height: 56px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; transition: transform .2s; }
+    .video-card:hover .video-play { transform: scale(1.1); }
+    .video-play::after { content: ''; border-left: 20px solid var(--green-deep); border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 5px; }
+    .video-duration { position: absolute; bottom: .75rem; right: .75rem; background: rgba(0,0,0,.7); color: #fff; font-family: var(--font-mono); font-size: .75rem; padding: .2rem .5rem; border-radius: 2px; z-index: 1; }
+    .video-info { padding: 1rem 1.25rem; }
+    .video-title { color: var(--cream); font-family: var(--font-display); font-size: 1rem; margin-bottom: .3rem; }
+    .video-meta { color: #888; font-family: var(--font-mono); font-size: .75rem; }
+
+    /* Photo gallery */
+    .photos-section { background: var(--cream); padding: 80px 0; }
+    .photo-filter { display: flex; gap: .75rem; flex-wrap: wrap; margin: 2rem 0; }
+    .filter-btn { padding: .5rem 1.25rem; background: transparent; border: 1.5px solid rgba(42,43,129,.2); border-radius: 2rem; font-family: var(--font-mono); font-size: .8rem; color: #666; cursor: pointer; transition: all .2s; }
+    .filter-btn.active, .filter-btn:hover { background: var(--green-deep); color: var(--gold); border-color: var(--green-deep); }
+    .photo-grid { columns: 3 220px; gap: 1rem; }
+    .photo-item { break-inside: avoid; margin-bottom: 1rem; border-radius: 4px; overflow: hidden; cursor: pointer; position: relative; }
+    .photo-item:hover .photo-overlay { opacity: 1; }
+    .photo-placeholder { width: 100%; background: linear-gradient(135deg, #1a1a55, #2a2b81); display: flex; align-items: center; justify-content: center; }
+    .photo-item img { width:100%; display:block; object-fit:cover; }
+    .photo-item.photo-missing { background:#f0f0f5; min-height:150px; display:flex; align-items:center; justify-content:center; }
+    .photo-item.photo-missing::after { content:attr(data-name); font-family:var(--font-mono); font-size:.75rem; color:#aaa; text-align:center; padding:.5rem; }
+    .photo-overlay { position: absolute; inset: 0; background: rgba(42,43,129,.7); opacity: 0; transition: opacity .2s; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.5rem; }
+    .photo-caption { font-family: var(--font-mono); font-size: .75rem; color: #666; text-align: center; padding: .5rem; }
+
+    /* Media Kit */
+    .kit-section { background: var(--green-deep); padding: 80px 0; }
+    .kit-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 1rem; margin-top: 3rem; }
+    .kit-item { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 4px; padding: 1.5rem; text-align: center; transition: background .2s; cursor: pointer; }
+    .kit-item:hover { background: rgba(237,131,14,.1); border-color: rgba(237,131,14,.4); }
+    .kit-icon { font-size: 2rem; display: block; margin-bottom: .75rem; }
+    .kit-name { font-family: var(--font-display); font-size: 1rem; color: var(--cream); margin-bottom: .3rem; }
+    .kit-format { font-family: var(--font-mono); font-size: .75rem; color: rgba(237,131,14,.7); }
+    .kit-full { margin-top: 2.5rem; text-align: center; }
+    .kit-full-btn { display: inline-block; background: var(--gold); color: var(--green-deep); padding: 1rem 2.5rem; font-family: var(--font-mono); font-size: .9rem; text-transform: uppercase; letter-spacing: .06em; border-radius: 2px; text-decoration: none; transition: background .2s; }
+    .kit-full-btn:hover { background: #b8911e; }
+
+    /* In the news */
+    .news-section { background: #fff; padding: 80px 0; }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .news-card { border: 1px solid rgba(42,43,129,.1); border-radius: 4px; padding: 1.5rem; transition: box-shadow .2s; }
+    .news-card:hover { box-shadow: 0 8px 24px rgba(42,43,129,.08); }
+    .news-outlet { font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--green-deep); margin-bottom: .5rem; }
+    .news-headline { font-size: 1rem; color: var(--near-black); line-height: 1.5; margin-bottom: .75rem; }
+    .news-meta { display: flex; justify-content: space-between; align-items: center; }
+    .news-date { font-family: var(--font-mono); font-size: .75rem; color: #999; }
+    .news-type { padding: .2rem .6rem; border-radius: 2rem; font-family: var(--font-mono); font-size: .7rem; }
+    .news-type.tv { background: rgba(42,43,129,.1); color: var(--green-deep); }
+    .news-type.print { background: rgba(237,131,14,.15); color: #a07a10; }
+    .news-type.online { background: rgba(0,100,200,.1); color: #0064c8; }
+
+    /* Stats bar */
+    .stats-bar { background: var(--gold); padding: 2rem 0; }
+    .stats-bar-inner { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; }
+    .stat-block { text-align: center; }
+    .stat-block .n { font-family: var(--font-display); font-size: 2rem; color: var(--green-deep); display: block; }
+    .stat-block .l { font-family: var(--font-mono); font-size: .75rem; color: rgba(42,43,129,.7); text-transform: uppercase; }
+
+    /* Media contact */
+    .contact-section { background: var(--cream); padding: 80px 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .contact-details { }
+    .contact-label { font-family: var(--font-mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--green-deep); margin-bottom: .5rem; }
+    .contact-signup { background: var(--green-deep); padding: 2.5rem; border-radius: 4px; }
+    .contact-signup h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--cream); margin-bottom: .75rem; }
+    .contact-signup p { color: rgba(247,242,234,.7); font-size: .9rem; margin-bottom: 1.5rem; }
+    .signup-row { display: flex; gap: .75rem; }
+    .signup-row input { flex: 1; padding: .85rem 1rem; border: none; border-radius: 2px; font-size: .95rem; }
+    .signup-row button { padding: .85rem 1.5rem; background: var(--gold); border: none; border-radius: 2px; font-family: var(--font-mono); font-size: .85rem; cursor: pointer; color: var(--green-deep); }
+
+    @media(max-width:768px) {
+      .press-card { grid-template-columns: 1fr; }
+      .press-read { width: fit-content; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .photo-grid { columns: 2 140px; }
+      .stats-bar-inner { gap: 2rem; }
+    }
+    /* Press Drawer */
+    .pr-drawer-overlay { position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:999; opacity:0; pointer-events:none; transition:opacity .3s; }
+    .pr-drawer-overlay.open { opacity:1; pointer-events:all; }
+    .pr-drawer { position:fixed; top:0; right:0; width:min(560px,100vw); height:100vh; background:#fff; z-index:1000; overflow-y:auto; padding:2.5rem; box-shadow:-8px 0 40px rgba(0,0,0,.2); transform:translateX(100%); transition:transform .4s cubic-bezier(0.19,1,0.22,1); }
+    .pr-drawer.open { transform:translateX(0); }
+    .pr-drawer-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem; }
+    .pr-drawer-badge { display:inline-block; padding:.25rem .75rem; border-radius:2rem; font-family:var(--font-mono); font-size:.7rem; text-transform:uppercase; background:rgba(42,43,129,.1); color:var(--green-deep); margin-bottom:.4rem; }
+    .pr-drawer-date { font-family:var(--font-mono); font-size:.8rem; color:#999; }
+    .pr-drawer-close { width:36px; height:36px; border-radius:50%; background:rgba(42,43,129,.08); color:var(--green-deep); font-size:1rem; display:flex; align-items:center; justify-content:center; cursor:pointer; border:none; flex-shrink:0; transition:background .2s; }
+    .pr-drawer-close:hover { background:var(--red); color:#fff; }
+    .pr-drawer-title { font-family:var(--font-display); font-size:1.6rem; color:var(--green-deep); margin-bottom:1.5rem; line-height:1.3; }
+    .pr-drawer-body { color:#444; font-size:.95rem; line-height:1.8; }
+    .pr-drawer-body p { margin-bottom:1rem; }
+    .pr-drawer-body h4 { font-family:var(--font-mono); font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; color:var(--green-deep); margin:1.5rem 0 .5rem; }
+    .pr-drawer-body ul { padding-left:1.2rem; margin-bottom:1rem; }
+    .pr-drawer-body ul li { margin-bottom:.4rem; }
+    .pr-drawer-footer { margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(42,43,129,.1); }
+    .pr-drawer-cta { display:inline-block; background:var(--green-deep); color:var(--gold); padding:.85rem 1.5rem; font-family:var(--font-mono); font-size:.8rem; text-transform:uppercase; letter-spacing:.05em; border-radius:2px; text-decoration:none; }
+    /* Make press cards clickable */
+    .press-card { cursor:pointer; }
+    .press-read { background:transparent; color:var(--gold); font-family:var(--font-mono); font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; text-decoration:none; white-space:nowrap; border:1px solid var(--gold); padding:.5rem 1rem; border-radius:2px; transition:background .2s,color .2s; cursor:pointer; }
+    .press-read:hover { background:var(--gold); color:var(--green-deep); }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo"><img src="/images/aisha-logo.png" alt="Aisha4Senate" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="nav-logo-text" style="display:none">AISHA<span>4</span>SENATE</span></a>
+    <div class="nav-links">
+      <a href="about.html">About</a><a href="agenda.html">Agenda</a><a href="contrast.html">The Contrast</a>
+      <a href="area-councils.html">Area Councils</a><a href="events.html">Events</a>
+      <a href="media.html" style="color:var(--gold)">Media</a><a href="faq.html">FAQ</a>
+      <a href="get-involved.html" class="nav-cta">Get Involved</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile">
+  <a href="about.html">About</a><a href="agenda.html">Agenda</a><a href="contrast.html">The Contrast</a>
+  <a href="area-councils.html">Area Councils</a><a href="events.html">Events</a>
+  <a href="media.html" style="color:var(--gold)">Media</a><a href="faq.html">FAQ</a><a href="get-involved.html" style="color:var(--gold)">Get Involved →</a>
+</div>
+
+<!-- HERO -->
+<section class="media-hero">
+  <div class="container">
+    <div class="hero-badge" style="background:rgba(237,131,14,.15);color:var(--gold)">Press · Videos · Photos · Media Kit</div>
+    <h1>Media <span>Center</span></h1>
+    <p>Your one-stop source for all #Aisha4Senate campaign media content. Press releases, videos, photos, and everything you need for coverage.</p>
+  </div>
+</section>
+
+<!-- MEDIA NAV -->
+<nav class="media-nav">
+  <div class="container">
+    <div class="media-nav-inner">
+      <a href="#press" class="active">Press Releases</a>
+      <a href="#videos">Videos</a>
+      <a href="#photos">Photos</a>
+      <a href="#kit">Media Kit</a>
+      <a href="#news">In The News</a>
+      <a href="#contact">Media Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-bar-inner">
+      <div class="stat-block"><span class="n counter" data-target="4800">0</span><span class="l">Volunteers</span></div>
+      <div class="stat-block"><span class="n counter" data-target="18">0</span><span class="l">Town Halls</span></div>
+      <div class="stat-block"><span class="n counter" data-target="18">0</span><span class="l">Wards Visited</span></div>
+      <div class="stat-block"><span class="n counter" data-target="47">0</span><span class="l">Media Appearances</span></div>
+      <div class="stat-block"><span class="n counter" data-target="125000">0</span><span class="l">Social Followers</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRESS RELEASE DRAWER (slides in from right) -->
+<div class="pr-drawer-overlay" id="prOverlay" onclick="closePR()"></div>
+<div class="pr-drawer" id="prDrawer">
+  <div class="pr-drawer-header">
+    <div>
+      <div class="pr-drawer-badge" id="prBadge">Campaign</div>
+      <div class="pr-drawer-date" id="prDate">May 2026</div>
+    </div>
+    <button class="pr-drawer-close" onclick="closePR()" aria-label="Close">✕</button>
+  </div>
+  <h2 class="pr-drawer-title" id="prTitle"></h2>
+  <div class="pr-drawer-body" id="prBody"></div>
+  <div class="pr-drawer-footer">
+    <a href="mailto:media@aisha4senate.ng" class="pr-drawer-cta">Request Full PDF → media@aisha4senate.ng</a>
+  </div>
+</div>
+
+<!-- PRESS RELEASES -->
+<section class="press-section" id="press">
+  <div class="container">
+    <div class="section-label reveal">OFFICIAL STATEMENTS</div>
+    <h2 class="section-title reveal">Press Releases</h2>
+    <div class="press-grid">
+
+      <div class="press-card reveal" onclick="openPR(0)">
+        <div class="press-date">May 2026</div>
+        <div>
+          <span class="press-badge">Campaign</span>
+          <div class="press-headline">Aisha Yesufu Announces Senate Bid: Bringing Constitutional Authority to Citizen Advocacy</div>
+          <div class="press-excerpt">Aisha Yesufu, renowned socio-political reformer and co-convener of the historic #BringBackOurGirls movement, today announced her candidacy for the FCT Senate seat under the Nigeria Democratic Congress (NDC).</div>
+        </div>
+        <button class="press-read">Read →</button>
+      </div>
+
+      <div class="press-card reveal" onclick="openPR(1)">
+        <div class="press-date">May 2026</div>
+        <div>
+          <span class="press-badge">Policy</span>
+          <div class="press-headline">A Better Abuja: Aisha Yesufu Unveils Comprehensive Seven-Pillar Legislative Agenda</div>
+          <div class="press-excerpt">Details the Security, Economic Empowerment, Infrastructure, Education, Maternal Health, Land Rights, and Transparency pillars with specific legislative proposals and measurable outcomes.</div>
+        </div>
+        <button class="press-read">Read →</button>
+      </div>
+
+      <div class="press-card reveal" onclick="openPR(2)">
+        <div class="press-date">Apr 2026</div>
+        <div>
+          <span class="press-badge">Events</span>
+          <div class="press-headline">Aisha Yesufu Begins Historic 62-Ward Listening Tour Across All FCT Area Councils</div>
+          <div class="press-excerpt">Campaign launches unprecedented ward-by-ward community engagement, committing to personally visit every single ward across all six FCT area councils before Election Day.</div>
+        </div>
+        <button class="press-read">Read →</button>
+      </div>
+
+      <div class="press-card reveal" onclick="openPR(3)">
+        <div class="press-date">Apr 2026</div>
+        <div>
+          <span class="press-badge">Policy</span>
+          <div class="press-headline">Aisha Yesufu Pledges Full Justice for Gbagyi, Koro, Bassa, Gade Indigenous Communities</div>
+          <div class="press-excerpt">Detailed land rights and full compensation plan addresses historical injustices faced by FCT indigenous communities, with commitment to introduce a Land Rights Tribunal Bill as first legislative priority.</div>
+        </div>
+        <button class="press-read">Read →</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="video-section" id="videos">
+  <div class="container">
+    <div class="section-label" style="color:rgba(237,131,14,.5)">CAMPAIGN VIDEOS</div>
+    <h2 class="section-title" style="color:var(--cream)" >Watch the Movement</h2>
+    <div class="video-grid">
+      <div class="video-card reveal">
+        <div class="video-thumb">
+          <div class="video-thumb-bg"></div>
+          <div class="video-play"></div>
+          <span class="video-duration">7:30</span>
+        </div>
+        <div class="video-info">
+          <div class="video-title">A Voice Outside Becomes Power Inside</div>
+          <div class="video-meta">Official Campaign Announcement · 2026</div>
+        </div>
+      </div>
+      <div class="video-card reveal">
+        <div class="video-thumb">
+          <div class="video-thumb-bg" style="background:linear-gradient(135deg,#2d1a05,#5a3800)"></div>
+          <div class="video-play"></div>
+          <span class="video-duration">1:00</span>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Why I'm Running</div>
+          <div class="video-meta">60-Second Viral Version</div>
+        </div>
+      </div>
+      <div class="video-card reveal">
+        <div class="video-thumb">
+          <div class="video-thumb-bg" style="background:linear-gradient(135deg,#0b1a2e,#0d3d5a)"></div>
+          <div class="video-play"></div>
+          <span class="video-duration">2:12</span>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Security Pillar Explainer</div>
+          <div class="video-meta">Seven Pillars Series · Pillar 1</div>
+        </div>
+      </div>
+      <div class="video-card reveal">
+        <div class="video-thumb">
+          <div class="video-thumb-bg" style="background:linear-gradient(135deg,#1a0b0b,#3d1212)"></div>
+          <div class="video-play"></div>
+          <span class="video-duration">2:05</span>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Maternal Health Pillar</div>
+          <div class="video-meta">Seven Pillars Series · Pillar 5</div>
+        </div>
+      </div>
+      <div class="video-card reveal">
+        <div class="video-thumb">
+          <div class="video-thumb-bg" style="background:linear-gradient(135deg,#1a1a0b,#3d3a12)"></div>
+          <div class="video-play"></div>
+          <span class="video-duration">18:45</span>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Gwagwalada Town Hall Highlights</div>
+          <div class="video-meta">Town Hall Series · May 2026</div>
+        </div>
+      </div>
+      <div class="video-card reveal">
+        <div class="video-thumb">
+          <div class="video-thumb-bg" style="background:linear-gradient(135deg,#0b1a0b,#123d12)"></div>
+          <div class="video-play"></div>
+          <span class="video-duration">3:22</span>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Residents Speak: Kwali Stories</div>
+          <div class="video-meta">Community Testimonials</div>
+        </div>
+      </div>
+      <div class="video-card reveal">
+        <div class="video-thumb">
+          <div class="video-thumb-bg" style="background:linear-gradient(135deg,#1a0b1a,#3d123d)"></div>
+          <div class="video-play"></div>
+          <span class="video-duration">2:18</span>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Land Rights Pillar Explainer</div>
+          <div class="video-meta">Seven Pillars Series · Pillar 6</div>
+        </div>
+      </div>
+      <div class="video-card reveal">
+        <div class="video-thumb">
+          <div class="video-thumb-bg"></div>
+          <div class="video-play"></div>
+          <span class="video-duration">2:30</span>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Transparency Pillar Explainer</div>
+          <div class="video-meta">Seven Pillars Series · Pillar 7</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOS -->
+<section class="photos-section" id="photos">
+  <div class="container">
+    <div class="section-label reveal">PHOTO GALLERY</div>
+    <h2 class="section-title reveal">Campaign in Pictures</h2>
+    <div class="photo-filter reveal">
+      <button class="filter-btn active">All Photos</button>
+      <button class="filter-btn">Campaign Events</button>
+      <button class="filter-btn">Town Halls</button>
+      <button class="filter-btn">Community Visits</button>
+      <button class="filter-btn">Behind the Scenes</button>
+    </div>
+    <!-- Gallery images live in /images/ folder. Name them aishapic1.jpg through aishapic12.jpg -->
+    <!-- Add more by copying a photo-item block and incrementing the number -->
+    <div class="photo-grid" id="photoGrid">
+      <div class="photo-item reveal" data-category="Campaign Events">
+        <img src="/images/aishapic1.jpg" alt="Campaign Launch" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">Campaign Launch</div>
+      </div>
+      <div class="photo-item reveal" data-category="Town Halls">
+        <img src="/images/aishapic2.jpg" alt="Gwagwalada Town Hall" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">Gwagwalada Town Hall</div>
+      </div>
+      <div class="photo-item reveal" data-category="Community Visits">
+        <img src="/images/aishapic3.jpg" alt="Kwali Community Visit" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">Kwali Community Visit</div>
+      </div>
+      <div class="photo-item reveal" data-category="Behind the Scenes">
+        <img src="/images/aishapic4.jpg" alt="Volunteer Orientation" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">Volunteer Orientation</div>
+      </div>
+      <div class="photo-item reveal" data-category="Campaign Events">
+        <img src="/images/aishapic5.jpg" alt="Kubwa Rally" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">Kubwa Rally</div>
+      </div>
+      <div class="photo-item reveal" data-category="Campaign Events">
+        <img src="/images/aishapic6.jpg" alt="Official Portrait" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">Official Portrait</div>
+      </div>
+      <div class="photo-item reveal" data-category="Community Visits">
+        <img src="/images/aishapic7.jpg" alt="Abaji Farm Visit" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">Abaji Farm Visit</div>
+      </div>
+      <div class="photo-item reveal" data-category="Town Halls">
+        <img src="/images/aishapic8.jpg" alt="Press Conference" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">Press Conference</div>
+      </div>
+      <div class="photo-item reveal" data-category="Community Visits">
+        <img src="/images/aishapic9.jpg" alt="Kuje Community" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">Kuje Community Visit</div>
+      </div>
+      <div class="photo-item reveal" data-category="Town Halls">
+        <img src="/images/aishapic10.jpg" alt="Bwari Town Hall" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">Bwari Town Hall</div>
+      </div>
+      <div class="photo-item reveal" data-category="Behind the Scenes">
+        <img src="/images/aishapic11.jpg" alt="Campaign HQ" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">Campaign HQ</div>
+      </div>
+      <div class="photo-item reveal" data-category="Campaign Events">
+        <img src="/images/aishapic12.jpg" alt="AMAC Rally" loading="lazy" onerror="this.parentElement.classList.add('photo-missing')">
+        <div class="photo-overlay">🔍</div>
+        <div class="photo-caption">AMAC Rally</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem">
+      <a href="#" class="btn btn-outline">View Full Gallery</a>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA KIT -->\n<section class="kit-section" id="kit">
+  <div class="container">
+    <div class="section-label" style="color:rgba(237,131,14,.5)">DOWNLOADABLE RESOURCES</div>
+    <h2 class="section-title" style="color:var(--cream)">Media Kit</h2>
+    <p style="color:rgba(247,242,234,.6);max-width:560px;margin:1rem 0 0">Everything you need for campaign coverage. All files hosted on Google Drive — click to download.</p>
+    <div class="kit-grid">
+      <!-- To update: replace GOOGLE_DRIVE_FILE_ID with the actual ID from your Google Drive share link -->
+      <!-- Share link format: drive.google.com/file/d/FILE_ID/view  — copy just the FILE_ID part -->
+      <a class="kit-item reveal" href="https://drive.google.com/uc?export=download&id=GDRIVE_ID_PHOTOS" target="_blank">
+        <span class="kit-icon">📸</span>
+        <div class="kit-name">High-Res Photos</div>
+        <div class="kit-format">JPG · PNG · 300 DPI</div>
+      </a>
+      <a class="kit-item reveal" href="https://drive.google.com/uc?export=download&id=GDRIVE_ID_LOGOS" target="_blank">
+        <span class="kit-icon">🎨</span>
+        <div class="kit-name">Campaign Logos</div>
+        <div class="kit-format">PNG · SVG · AI · EPS</div>
+      </a>
+      <a class="kit-item reveal" href="https://drive.google.com/uc?export=download&id=GDRIVE_ID_BIO" target="_blank">
+        <span class="kit-icon">📄</span>
+        <div class="kit-name">Official Biography</div>
+        <div class="kit-format">PDF · DOCX (50, 200, 1000 words)</div>
+      </a>
+      <a class="kit-item reveal" href="https://drive.google.com/uc?export=download&id=GDRIVE_ID_PILLARS" target="_blank">
+        <span class="kit-icon">📋</span>
+        <div class="kit-name">Seven Pillars One-Pager</div>
+        <div class="kit-format">PDF · Key stats + contacts</div>
+      </a>
+      <a class="kit-item reveal" href="https://drive.google.com/uc?export=download&id=GDRIVE_ID_TALKING" target="_blank">
+        <span class="kit-icon">💬</span>
+        <div class="kit-name">Talking Points</div>
+        <div class="kit-format">PDF · Key messages + quotes</div>
+      </a>
+      <a class="kit-item reveal" href="https://drive.google.com/uc?export=download&id=GDRIVE_ID_FACTS" target="_blank">
+        <span class="kit-icon">📊</span>
+        <div class="kit-name">Fact Sheets</div>
+        <div class="kit-format">PDF · Credentials + milestones</div>
+      </a>
+      <a class="kit-item reveal" href="https://drive.google.com/uc?export=download&id=GDRIVE_ID_TIMELINE" target="_blank">
+        <span class="kit-icon">📅</span>
+        <div class="kit-name">Campaign Timeline</div>
+        <div class="kit-format">PDF · iCal</div>
+      </a>
+    </div>
+    <div class="kit-full">
+      <!-- Replace GDRIVE_ID_FULL_KIT with the folder or zip file ID on Drive -->
+      <a href="https://drive.google.com/drive/folders/GDRIVE_ID_FULL_KIT" target="_blank" class="kit-full-btn">⬇ Download Complete Media Kit (Google Drive)</a>
+    </div>
+  </div>
+</section>
+
+<!-- IN THE NEWS -->
+<section class="news-section" id="news">
+  <div class="container">
+    <div class="section-label reveal">MEDIA COVERAGE</div>
+    <h2 class="section-title reveal">In The News</h2>
+    <div class="news-grid">
+      <div class="news-card reveal">
+        <div class="news-outlet">Guardian Nigeria</div>
+        <div class="news-headline">Activist Aisha Yesufu Enters Political Arena, Eyes FCT Senate Seat</div>
+        <div class="news-meta"><span class="news-date">May 2026</span><span class="news-type online">Online</span></div>
+      </div>
+      <div class="news-card reveal">
+        <div class="news-outlet">Channels TV</div>
+        <div class="news-headline">A Better Abuja: Can Yesufu's Campaign Promises Become Legislative Reality?</div>
+        <div class="news-meta"><span class="news-date">May 2026</span><span class="news-type tv">TV</span></div>
+      </div>
+      <div class="news-card reveal">
+        <div class="news-outlet">Arise News</div>
+        <div class="news-headline">Aisha Yesufu on Why FCT Residents Need New Senate Leadership in 2027</div>
+        <div class="news-meta"><span class="news-date">Apr 2026</span><span class="news-type tv">TV</span></div>
+      </div>
+      <div class="news-card reveal">
+        <div class="news-outlet">Premium Times</div>
+        <div class="news-headline">From Streets to Senate: The Aisha Yesufu Story and What It Means for Abuja</div>
+        <div class="news-meta"><span class="news-date">Apr 2026</span><span class="news-type online">Online</span></div>
+      </div>
+      <div class="news-card reveal">
+        <div class="news-outlet">Vanguard</div>
+        <div class="news-headline">Yesufu's 62-Ward Tour: A New Model for Grassroots Political Campaigning</div>
+        <div class="news-meta"><span class="news-date">Apr 2026</span><span class="news-type print">Print</span></div>
+      </div>
+      <div class="news-card reveal">
+        <div class="news-outlet">Punch Newspaper</div>
+        <div class="news-headline">Indigenous Rights in FCT: Yesufu Promises Land Tribunal, Full Compensation</div>
+        <div class="news-meta"><span class="news-date">Mar 2026</span><span class="news-type print">Print</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-label reveal">GET IN TOUCH</div>
+    <h2 class="section-title reveal">Media Inquiries</h2>
+    <div class="contact-grid">
+      <div class="contact-details reveal">
+        <div class="contact-label" style="margin-top:1.5rem">Campaign Media Team</div>
+        <p style="color:#555;font-size:.95rem;line-height:1.7;margin-bottom:1.5rem">For interview requests, event coverage credentials, background information, quote requests, photo and video access, and press conference notifications.</p>
+        <div style="margin-bottom:1rem"><div class="contact-label">Email</div><a href="mailto:media@aisha4senate.ng" style="color:var(--green-deep);font-size:1.1rem;font-family:var(--font-mono)">media@aisha4senate.ng</a></div>
+        <div style="margin-bottom:1rem"><div class="contact-label">Phone</div><a href="tel:+2348033579711" style="color:var(--green-deep);font-size:1.1rem;font-family:var(--font-mono)">+234 803 357 9711</a></div>
+        <div style="margin-top:2rem"><div class="contact-label">Response Time</div><p style="color:#555;font-size:.9rem">We respond to all media inquiries within 4 business hours.</p></div>
+      </div>
+      <div class="contact-signup reveal">
+        <h3>Get Media Advisories</h3>
+        <p>Be first to know about press conferences, major announcements, and media opportunities.</p>
+        <div class="signup-row">
+          <input type="email" id="mediaEmail" placeholder="your@email.com">
+          <button type="button" id="mediaSubBtn" onclick="subscribeMedia()">Subscribe</button>
+        </div>
+        <p style="color:rgba(247,242,234,.4);font-size:.8rem;margin-top:1rem">We never share your email. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">AISHA<span>4</span>SENATE</div>
+        <p class="tagline">A Better Abuja — For All Of Us.<br>FCT Senate 2027 · NDC</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Twitter">𝕏</a>
+          <a href="#" class="footer-social" aria-label="Facebook">f</a>
+          <a href="#" class="footer-social" aria-label="Instagram">▣</a>
+          <a href="#" class="footer-social" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Quick Links</h4><ul>
+        <li><a href="about.html">About Aisha</a></li><li><a href="agenda.html">The 7 Pillars</a></li>
+        <li><a href="contrast.html">The Contrast</a></li><li><a href="get-involved.html">Join Movement</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Media</h4><ul>
+        <li><a href="#press">Press Releases</a></li><li><a href="#videos">Videos</a></li>
+        <li><a href="#photos">Photos</a></li><li><a href="#kit">Media Kit</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item"><div><strong>Email</strong>media@aisha4senate.ng</div></div>
+        <div class="footer-contact-item"><div><strong>Phone</strong>+234 803 357 9711</div></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024–2027 Aisha Yesufu for Senate Campaign. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Photo filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+  // Media nav active state
+  window.addEventListener('scroll', () => {
+    const sections = ['press','videos','photos','kit','news','contact'];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      const link = document.querySelector(`.media-nav a[href="#${id}"]`);
+      if (!el || !link) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= 150 && rect.bottom >= 150) {
+        document.querySelectorAll('.media-nav a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  });
+
+  // ── PRESS RELEASE DRAWER DATA ─────────────────────────────────
+  // To add a new press release: copy one object below, update all fields, push to array.
+  const pressReleases = [
+    {
+      badge: 'Campaign',
+      date: 'May 2026',
+      title: 'Aisha Yesufu Announces Senate Bid: Bringing Constitutional Authority to Citizen Advocacy',
+      body: `
+        <p><strong>ABUJA, May 2026</strong> — Aisha Yesufu, renowned socio-political reformer and co-convener of the historic #BringBackOurGirls movement, today formally announced her candidacy for the Federal Capital Territory (FCT) Senate seat under the Nigeria Democratic Congress (NDC).</p>
+        <h4>Key Points</h4>
+        <ul>
+          <li>Yesufu brings 21+ years of frontline citizen advocacy into constitutional legislative power</li>
+          <li>Running under the Nigeria Democratic Congress (NDC), aligned with Peter Obi's reform vision</li>
+          <li>Campaign centred on seven legislative pillars targeting every FCT area council</li>
+          <li>Committed to visiting all 62 wards before Election Day — February 14, 2027</li>
+        </ul>
+        <h4>Quote from the Candidate</h4>
+        <p><em>"For 21 years I have fought for A Better Nigeria from the outside. Today, I am seeking constitutional power to deliver A Better Abuja from the inside — not with promises, but with legislation that cannot be reversed."</em></p>
+        <h4>Background</h4>
+        <p>Yesufu is co-convener of #BringBackOurGirls, founding member of #NigeriansMarchAgainstCorruption, a key figure in the 2020 #EndSARS movement, and founder of Citizens Hub. She is a BBC 100 Women honouree (2020) and Stanford University fellow.</p>
+      `
+    },
+    {
+      badge: 'Policy',
+      date: 'May 2026',
+      title: 'A Better Abuja: Aisha Yesufu Unveils Comprehensive Seven-Pillar Legislative Agenda',
+      body: `
+        <p><strong>ABUJA, May 2026</strong> — The Aisha4Senate campaign today released the full text of its legislative agenda, built on Seven Pillars targeting the most urgent challenges facing FCT residents.</p>
+        <h4>The Seven Pillars</h4>
+        <ul>
+          <li><strong>Security</strong> — Community policing, solar streetlights, 70% crime reduction target</li>
+          <li><strong>Economic Empowerment</strong> — Rent Control Bill, 100,000 youth trained, 10,000 micro-loans</li>
+          <li><strong>Infrastructure</strong> — 500,000+ with clean water, Light Rail expansion, road rehabilitation</li>
+          <li><strong>Education</strong> — 200+ schools renovated, 50,000 scholarships</li>
+          <li><strong>Maternal Health</strong> — Free prenatal-to-postnatal care, mobile clinics in every council</li>
+          <li><strong>Land Rights</strong> — Indigenous Rights & Land Protection Bill, full retroactive compensation</li>
+          <li><strong>Transparency</strong> — Real-time budget platform, monthly town halls, open contracts</li>
+        </ul>
+        <h4>Implementation Commitment</h4>
+        <p>All seven bills to be drafted and introduced within the first 100 days. Every project tracked on a public digital dashboard. Community monitoring committees for every major intervention.</p>
+      `
+    },
+    {
+      badge: 'Events',
+      date: 'April 2026',
+      title: 'Aisha Yesufu Begins Historic 62-Ward Listening Tour Across All FCT Area Councils',
+      body: `
+        <p><strong>ABUJA, April 2026</strong> — The Aisha4Senate campaign today launched its historic 62-Ward Listening Tour, an unprecedented commitment to personally visit every ward across all six FCT area councils before Election Day on February 14, 2027.</p>
+        <h4>Tour Scope</h4>
+        <ul>
+          <li>AMAC: 11 wards · Bwari: 10 wards · Gwagwalada: 10 wards</li>
+          <li>Kuje: 10 wards · Kwali: 11 wards · Abaji: 10 wards</li>
+          <li>Total: 62 wards across 6 area councils</li>
+        </ul>
+        <h4>Format</h4>
+        <p>Each visit includes an open town hall, community listening session, Q&A with residents, and volunteer recruitment. Residents can request a visit at <strong>events.html</strong> on this website.</p>
+        <h4>Progress to Date</h4>
+        <p>18 of 62 wards visited (29% complete). Track real-time progress on the <a href="events.html" style="color:var(--green-deep)">Events page</a>.</p>
+      `
+    },
+    {
+      badge: 'Policy',
+      date: 'April 2026',
+      title: 'Aisha Yesufu Pledges Full Justice for Gbagyi, Koro, Bassa, Gade Indigenous Communities',
+      body: `
+        <p><strong>ABUJA, April 2026</strong> — Aisha Yesufu today released the full details of her Indigenous Rights & Land Protection Bill, committing to address decades of land injustice suffered by FCT's indigenous communities.</p>
+        <h4>Bill Commitments</h4>
+        <ul>
+          <li>Mandatory full compensation before ANY land acquisition — no exceptions</li>
+          <li>Land Rights Tribunal with guaranteed indigenous representation</li>
+          <li>Community veto power over developments affecting ancestral lands</li>
+          <li>Retroactive compensation for all land taken without payment since FCT's creation</li>
+          <li>Criminal penalties for officials who violate indigenous land rights</li>
+        </ul>
+        <h4>Communities Covered</h4>
+        <p>The bill specifically protects the Gbagyi, Koro, Bassa, and Gade peoples — the original inhabitants of the land on which Nigeria's capital was built.</p>
+        <h4>Quote</h4>
+        <p><em>"Abuja's capital sits on their land. Yet they have received nothing. This will become law, not just policy."</em> — Aisha Yesufu</p>
+      `
+    }
+  ];
+
+  function openPR(index) {
+    const pr = pressReleases[index];
+    document.getElementById('prBadge').textContent = pr.badge;
+    document.getElementById('prDate').textContent = pr.date;
+    document.getElementById('prTitle').textContent = pr.title;
+    document.getElementById('prBody').innerHTML = pr.body;
+    document.getElementById('prOverlay').classList.add('open');
+    document.getElementById('prDrawer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePR() {
+    document.getElementById('prOverlay').classList.remove('open');
+    document.getElementById('prDrawer').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePR(); });
+
+  // Media advisory newsletter signup → /api/newsletter
+  async function subscribeMedia() {
+    const emailEl = document.getElementById('mediaEmail');
+    const btn = document.getElementById('mediaSubBtn');
+    if (!emailEl.value || !emailEl.value.includes('@')) {
+      emailEl.style.border = '2px solid var(--red)';
+      return;
+    }
+    btn.textContent = '...';
+    btn.disabled = true;
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailEl.value, source: 'Media Center' })
+      });
+      const data = await res.json();
+      btn.textContent = data.success ? '✓ Subscribed' : 'Error';
+      if (data.success) btn.style.background = '#2a2b81';
+      else btn.disabled = false;
+    } catch {
+      btn.textContent = 'Retry';
+      btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>
