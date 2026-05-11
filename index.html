@@ -46,25 +46,30 @@
 
 <!-- ═══ HERO ══════════════════════════════════════════════════ -->
 <section class="hero">
-  <div class="hero-bg-image"></div>
-  <div class="container hero-content">
-    <div class="hero-badge">
-      FCT Senate 2027 · NDC
+  <div class="hero-split-inner">
+    <!-- LEFT: Her image -->
+    <div class="hero-image-col">
+      <img src="/images/aisha-hero-bg.jpg" alt="Aisha Yesufu" onerror="this.style.opacity='0'">
     </div>
-    <h1 class="hero-headline">
-      A Better<br><span class="gold">Abuja.</span>
-    </h1>
-    <p class="hero-sub">For All Of Us</p>
-    <div class="hero-divider"></div>
-    <p class="hero-tagline">
-      A Voice Outside Becomes Power Inside. For 21 years, I fought from the streets. 
-      Now I'm seeking constitutional power to legislate the change Abuja deserves.
-    </p>
-    <div class="hero-actions">
-      <a href="get-involved.html" class="btn btn-primary">Join The Movement →</a>
-      <a href="agenda.html" class="btn btn-secondary">See The Agenda</a>
+    <!-- RIGHT: Text -->
+    <div class="hero-text-col">
+      <div class="hero-badge">FCT Senate 2027 · NDC</div>
+      <h1 class="hero-headline">
+        A Better<br><span class="gold">Abuja.</span>
+      </h1>
+      <p class="hero-sub">For All Of Us</p>
+      <div class="hero-divider"></div>
+      <p class="hero-tagline">
+        A Voice Outside Becomes Power Inside. For 21 years, I fought from the streets.
+        Now I'm seeking constitutional power to legislate the change Abuja deserves.
+      </p>
+      <div class="hero-actions">
+        <a href="get-involved.html" class="btn btn-primary">Join The Movement →</a>
+        <a href="agenda.html" class="btn btn-secondary">See The Agenda</a>
+      </div>
     </div>
   </div>
+  <!-- Stats bar below the split -->
   <div class="hero-stats">
     <div class="hero-stat">
       <span class="hero-stat-num" data-target="6" data-suffix="">6</span>
@@ -106,55 +111,36 @@
   </div>
 </div>
 
-<!-- ═══ VIDEO + PORTRAIT SECTION ══════════════════════════════ -->
-<section class="intro-split">
+<!-- ═══ TV VIDEO SECTION ═══════════════════════════════════════ -->
+<section class="tv-section">
   <div class="container">
-    <div class="intro-split-inner">
-
-      <!-- LEFT: Video -->
-      <div class="intro-video-side reveal">
-        <div class="video-frame">
-          <div class="video-label">
-            <span class="video-label-dot"></span>
-            Watch: A Voice Outside Becomes Power Inside
-          </div>
-          <!-- Replace YOUTUBE_VIDEO_ID below with your actual YouTube video ID -->
-          <!-- e.g. if your video URL is youtube.com/watch?v=dQw4w9WgXcQ  use  dQw4w9WgXcQ -->
-          <div class="video-embed-wrapper">
-            <iframe
-              id="campaignVideo"
-              src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID?rel=0&modestbranding=1"
-              title="Aisha Yesufu — A Voice Outside Becomes Power Inside"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
-          <div class="video-caption">
-            Official Campaign Announcement · Nigeria Democratic Congress · FCT Senate 2027
-          </div>
+    <div class="section-eyebrow" style="justify-content:center;margin-bottom:1rem">Watch the Campaign</div>
+    <h2 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.5rem);color:#fff;text-align:center;margin-bottom:2.5rem">
+      A Voice Outside Becomes<br><em style="color:var(--gold)">Power Inside</em>
+    </h2>
+    <div class="tv-outer">
+      <div class="tv-body">
+        <div class="tv-screen">
+          <!-- Replace YOUTUBE_VIDEO_ID with your actual YouTube video ID -->
+          <!-- URL: youtube.com/watch?v=ABC123 → use ABC123 -->
+          <iframe
+            id="campaignVideo"
+            src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID?autoplay=1&mute=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&controls=1&cc_load_policy=0&showinfo=0"
+            title="Aisha Yesufu — A Voice Outside Becomes Power Inside"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+          <div class="tv-reflection"></div>
+        </div>
+        <div class="tv-bottom-bar">
+          <div class="tv-brand-dot"><span></span> LIVE CAMPAIGN · 2027</div>
+          <button class="tv-unmute-btn" id="unmuteBtn" onclick="unmuteVideo()">🔇 Tap to Unmute</button>
         </div>
       </div>
-
-      <!-- RIGHT: Portrait + Quote -->
-      <div class="intro-portrait-side reveal reveal-delay-1">
-        <div class="portrait-frame">
-          <img
-            src="/images/aisha-portrait-main.jpg"
-            alt="Aisha Yesufu — FCT Senate Candidate 2027"
-            class="portrait-img"
-            onerror="this.parentElement.classList.add('portrait-placeholder')"
-          >
-          <div class="portrait-overlay"></div>
-        </div>
-        <div class="portrait-quote">
-          <div class="portrait-quote-mark">"</div>
-          <p>For 21 years I fought for A Better Nigeria from the outside. Now I'm seeking constitutional power to deliver A Better Abuja — not with promises, but with <strong>legislation.</strong></p>
-          <div class="portrait-sig">— Aisha Yesufu</div>
-        </div>
-      </div>
-
+      <div class="tv-stand-neck"></div>
+      <div class="tv-stand-base"></div>
     </div>
+    <p class="tv-caption">Official Campaign Announcement · Nigeria Democratic Congress · FCT Senate 2027</p>
   </div>
 </section>
 
@@ -420,9 +406,10 @@
   <div class="container">
     <div class="about-preview-grid">
       <div class="about-image-block reveal">
-        <div class="about-image-placeholder">
-          <div class="about-image-badge">21 Years Fighting</div>
-          <div class="about-image-stat">
+        <div class="about-image-placeholder" style="position:relative;overflow:hidden;padding:0;">
+          <img src="/images/aisha-portrait-main.jpg" alt="Aisha Yesufu" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;min-height:420px;">
+          <div class="about-image-badge" style="position:absolute;top:1.5rem;right:1.5rem;z-index:2">21 Years Fighting</div>
+          <div class="about-image-stat" style="position:absolute;bottom:1.5rem;left:1.5rem;z-index:2">
             <strong>0</strong>
             <span>Times Compromised</span>
           </div>
@@ -617,13 +604,29 @@
   </div>
 </section>
 
+<!-- ═══ PRE-FOOTER RALLY STRIP ════════════════════════════════ -->
+<div class="prefooter-rally">
+  <img src="/images/aisha-rally-hands.jpg" alt="Aisha Yesufu — The Movement">
+  <div class="prefooter-rally-overlay">
+    <div class="prefooter-rally-text">
+      <h2>A Better Abuja.<br><em>For All Of Us.</em></h2>
+      <p>#ABetterAbuja · #Aisha4Senate · FCT 2027</p>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo">AISHA<span>4</span>SENATE</div>
-        <p class="tagline">A Better Abuja — For All Of Us.<br>A Voice Outside Becomes Power Inside.<br>FCT Senate 2027 · NDC</p>
+        <img src="/images/aisha-logo.png" alt="Aisha4Senate" class="footer-logo-img" onerror="this.style.display='none'">
+        <p class="tagline">A Better Abuja — For All Of Us.<br>A Voice Outside Becomes Power Inside.</p>
+        <div class="footer-ndc-block">
+          <div class="ndc-label">Running Under</div>
+          <div class="ndc-name">Nigeria Democratic Congress</div>
+          <div class="ndc-motto">"Competence. Character. Change."</div>
+        </div>
         <div class="footer-socials">
           <a href="#" class="footer-social" aria-label="Twitter">𝕏</a>
           <a href="#" class="footer-social" aria-label="Facebook">f</a>
@@ -685,6 +688,18 @@
 
 <script src="js/main.js"></script>
 <script>
+  // Unmute TV video
+  function unmuteVideo() {
+    const iframe = document.getElementById('campaignVideo');
+    const btn = document.getElementById('unmuteBtn');
+    if (!iframe) return;
+    const src = iframe.src;
+    iframe.src = src.replace('&mute=1','&mute=0').replace('mute=1&','mute=0&');
+    btn.textContent = '🔊 Unmuted';
+    btn.style.background = 'var(--gold)';
+    btn.style.color = '#fff';
+    btn.onclick = null;
+  }
   // Newsletter / Stay Updated form → /api/newsletter
   const emailForm = document.querySelector('.email-form');
   if (emailForm) {
