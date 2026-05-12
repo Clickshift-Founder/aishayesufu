@@ -2779,8 +2779,7 @@ input, textarea, select { font-family: inherit; }
   flex-shrink: 0;
   width: 100px;
   height: auto;
-  opacity: .85;
-  filter: brightness(0) invert(1);
+  opacity: .9;
   margin-top: .5rem;
 }
 @media(max-width: 768px) {
@@ -2873,4 +2872,4 @@ input, textarea, select { font-family: inherit; }
   .cta-rally-image::after {
     background: linear-gradient(to bottom, transparent 40%, var(--near-black) 100%);
   }
-} 
+}
