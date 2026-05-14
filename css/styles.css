@@ -2547,9 +2547,11 @@ input, textarea, select { font-family: inherit; }
   .hero-text-col { padding: 40px 0 60px; }
 }
 
+
+
 /* ─── TV-STYLE VIDEO ─────────────────────────────────────────── */
 .tv-section {
-  background: #0a0a14;
+  background: var(--green-deep);
   padding: 80px 0 60px;
   text-align: center;
 }
@@ -2572,7 +2574,7 @@ input, textarea, select { font-family: inherit; }
   border-radius: 0 0 4px 4px;
 }
 .tv-body {
-  background: linear-gradient(160deg, #1e1e30, #12121f);
+  background: linear-gradient(160deg, #1a1b60, #0f1045);
   border-radius: 20px 20px 8px 8px;
   padding: 24px 24px 20px;
   box-shadow:
