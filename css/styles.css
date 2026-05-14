@@ -337,7 +337,7 @@ input, textarea, select { font-family: inherit; }
 /* ─── HOMEPAGE HERO ───────────────────────────────────────── */
 .hero {
   min-height: 100vh;
-  background: var(--near-black);
+  background: var(--green-deep);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -633,7 +633,7 @@ input, textarea, select { font-family: inherit; }
 /* ─── PILLARS SECTION ─────────────────────────────────────── */
 .pillars-section {
   padding: clamp(80px, 12vh, 140px) 0;
-  background: var(--near-black);
+  background: var(--green-deep);
   position: relative;
   overflow: hidden;
 }
