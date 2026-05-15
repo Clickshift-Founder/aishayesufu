@@ -112,7 +112,7 @@ input, textarea, select { font-family: inherit; }
   transition: background 0.4s, box-shadow 0.4s;
 }
 .nav.scrolled {
-  background: rgba(8,8,8,0.95);
+  background: rgba(42,43,129,0.97);
   backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 rgba(255,255,255,0.08);
 }
@@ -1197,7 +1197,7 @@ input, textarea, select { font-family: inherit; }
 
 /* ─── FOOTER ──────────────────────────────────────────────── */
 .footer {
-  background: var(--black);
+  background: var(--green-deep);
   padding: clamp(60px, 8vh, 100px) 0 0;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
@@ -2491,7 +2491,7 @@ input, textarea, select { font-family: inherit; }
 }
 .hero-text-col > * { position: relative; z-index: 1; }
 /* Remove old bg image approach when split is used */
-.hero-split-inner ~ .hero-stats { position: relative; z-index: 2; background: rgba(0,0,0,.35); }
+.hero-split-inner ~ .hero-stats { position: relative; z-index: 2; background: var(--green-deep); }
 
 /* ─── PAGE HERO — IMAGE RIGHT ────────────────────────────────── */
 .page-header {
