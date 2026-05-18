@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get Involved — Join the #ABetterAbuja Movement | Aisha4Senate</title>
   <meta name="description" content="Volunteer, become a ward champion, host a house party, donate, or spread the word. Every action counts. Join the movement for A Better Abuja.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
   <style>
     .gi-hero { background: var(--green-deep); padding: 120px 0 80px; text-align: center; position: relative; overflow: hidden; }
-    .gi-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 40%, rgba(237,131,14,.12) 0%, transparent 65%); pointer-events: none; }
+    .gi-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 40%, rgba(237,131,14,.12) 0%, transparent 65%); }
     .gi-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem,6vw,4.5rem); color: var(--cream); line-height: 1.1; margin-bottom: 1rem; }
     .gi-hero h1 span { color: var(--gold); }
     .gi-hero p { color: rgba(247,242,234,.75); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2.5rem; }
@@ -105,7 +103,7 @@
     <div class="hero-badge">100,000 Volunteers · 62 Wards · One Movement</div>
     <h1>Join the<br><span>#ABetterAbuja</span><br>Movement</h1>
     <p>Every voice matters. Every action counts. Whether you can give 1 hour a week or 40 — whether you're in Maitama or Kwali — there is a place for you in this movement.</p>
-    <a href="#volunteer-form" class="btn" style="background:#fff;color:var(--green-deep);font-weight:700;padding:.9rem 2.5rem;border-radius:2rem;">Volunteer Now</a>
+    <a href="#volunteer-form" class="btn btn-gold">Volunteer Now</a>
   </div>
 </section>
 
@@ -131,7 +129,7 @@
 
       <div class="way-card reveal">
         <div class="way-card-head">
-          <div class="way-icon"></div>
+          <div class="way-icon">🙋</div>
           <div>
             <div class="way-title">Become a Volunteer</div>
             <div class="way-sub">Join the 100,000-strong army</div>
@@ -152,7 +150,7 @@
 
       <div class="way-card reveal">
         <div class="way-card-head">
-          <div class="way-icon"></div>
+          <div class="way-icon">👑</div>
           <div>
             <div class="way-title">Ward Champion</div>
             <div class="way-sub">Lead your community</div>
@@ -173,7 +171,7 @@
 
       <div class="way-card reveal">
         <div class="way-card-head">
-          <div class="way-icon"></div>
+          <div class="way-icon">🏠</div>
           <div>
             <div class="way-title">Host a House Party</div>
             <div class="way-sub">Bring the movement home</div>
@@ -193,7 +191,7 @@
 
       <div class="way-card reveal">
         <div class="way-card-head">
-          <div class="way-icon"></div>
+          <div class="way-icon">💻</div>
           <div>
             <div class="way-title">Specialized Team</div>
             <div class="way-sub">Use your professional skills</div>
@@ -214,7 +212,7 @@
 
       <div class="way-card reveal">
         <div class="way-card-head" style="background:#1a2e1a">
-          <div class="way-icon"></div>
+          <div class="way-icon">💰</div>
           <div>
             <div class="way-title">Donate</div>
             <div class="way-sub">Fund a people-powered campaign</div>
@@ -229,13 +227,13 @@
             <li>₦100,000 → Organize a ward-level rally</li>
             <li>Every kobo tracked and published</li>
           </ul>
-          <a href="#" class="way-cta gold">Donate Now</a>
+          <a href="#" class="way-cta gold" onclick="openDonateModal(event)">Donate Now</a>
         </div>
       </div>
 
       <div class="way-card reveal">
         <div class="way-card-head">
-          <div class="way-icon"></div>
+          <div class="way-icon">📢</div>
           <div>
             <div class="way-title">Spread the Word</div>
             <div class="way-sub">Your voice is your power</div>
@@ -285,7 +283,7 @@
           </div>
           <div class="form-group">
             <label>WhatsApp Number</label>
-            <input type="tel" placeholder="+234 xxx xxx xxxx">
+            <input type="tel" placeholder="Same as above or different">
           </div>
         </div>
         <div class="form-row">
@@ -374,10 +372,10 @@
         </div>
 
         <div class="form-group">
-          <label class="checkbox-item" style="font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-dark)"><input type="checkbox" required> I commit to respecting campaign guidelines and representing #ABetterAbuja positively in my community</label>
+          <label class="checkbox-item" style="font-family:var(--font-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep)"><input type="checkbox" required> I commit to respecting campaign guidelines and representing #ABetterAbuja positively in my community</label>
         </div>
 
-        <button type="submit" class="form-submit" style="color:var(--cream)">Join the #Aisha4SenateFamily →</button>
+        <button type="submit" class="form-submit">Join the #Aisha4SenateFamily →</button>
       </form>
 
       <div class="form-success" id="formSuccess">
@@ -420,7 +418,7 @@
     <p class="reveal">We need 100,000 committed volunteers to win in 2027. Whether you give us 1 hour or 40, donate ₦1,000 or ₦1,000,000, whether you're in Maitama or Abaji — you matter. Use your power.</p>
     <div class="btn-group reveal">
       <a href="#volunteer-form" class="btn btn-gold">Volunteer Now</a>
-      <a href="#" class="btn" style="border:1px solid rgba(247,242,234,.3);color:var(--cream)">Donate →</a>
+      <a href="#" class="btn" style="border:1px solid rgba(247,242,234,.3);color:var(--cream)" onclick="openDonateModal(event)">Donate →</a>
     </div>
   </div>
 </section>
@@ -474,42 +472,188 @@
   </div>
 </footer>
 
+<!-- ═══ DONATION MODAL ════════════════════════════════════════ -->
+<div class="donate-overlay" id="donateOverlay" onclick="closeDonateModal()"></div>
+<div class="donate-modal" id="donateModal" role="dialog" aria-modal="true" aria-label="Donate">
+  <button class="donate-close" onclick="closeDonateModal()" aria-label="Close">✕</button>
+  <div class="donate-modal-header">
+    <div class="donate-modal-eyebrow">People-Powered Campaign</div>
+    <h2 class="donate-modal-title">Support A Better Abuja</h2>
+    <p class="donate-modal-sub">Every kobo is tracked and published. Your contribution fuels the movement.</p>
+  </div>
+
+  <form id="donateForm">
+    <!-- Amount options -->
+    <div class="donate-amounts">
+      <button type="button" class="donate-amt" data-amount="₦5,000" onclick="selectAmount(this)">₦5,000</button>
+      <button type="button" class="donate-amt" data-amount="₦10,000" onclick="selectAmount(this)">₦10,000</button>
+      <button type="button" class="donate-amt" data-amount="₦25,000" onclick="selectAmount(this)">₦25,000</button>
+      <button type="button" class="donate-amt" data-amount="₦50,000" onclick="selectAmount(this)">₦50,000</button>
+      <button type="button" class="donate-amt" data-amount="₦100,000" onclick="selectAmount(this)">₦100,000</button>
+      <button type="button" class="donate-amt" data-amount="₦500,000" onclick="selectAmount(this)">₦500,000</button>
+      <button type="button" class="donate-amt" data-amount="₦1,000,000+" onclick="selectAmount(this)">₦1M+</button>
+      <button type="button" class="donate-amt" data-amount="Other" onclick="selectAmount(this)">Other</button>
+    </div>
+    <input type="hidden" id="selectedAmount">
+
+    <!-- Custom amount (shown when Other selected) -->
+    <div class="donate-field" id="customAmountField" style="display:none">
+      <label>Enter Amount (₦)</label>
+      <input type="text" id="customAmount" placeholder="e.g. 75,000">
+    </div>
+
+    <div class="donate-row">
+      <div class="donate-field">
+        <label>Full Name *</label>
+        <input type="text" id="donateName" required placeholder="Your full name">
+      </div>
+      <div class="donate-field">
+        <label>Phone Number *</label>
+        <input type="tel" id="donatePhone" required placeholder="+234 xxx xxx xxxx">
+      </div>
+    </div>
+    <div class="donate-field">
+      <label>Email Address *</label>
+      <input type="email" id="donateEmail" required placeholder="your@email.com">
+    </div>
+    <div class="donate-field">
+      <label>Comment / Message (optional)</label>
+      <textarea id="donateComment" rows="3" placeholder="A message of support, or anything you'd like us to know..."></textarea>
+    </div>
+
+    <button type="submit" class="donate-submit" id="donateSubmitBtn">
+      Confirm Donation Intent →
+    </button>
+    <p style="font-size:.75rem;color:#888;text-align:center;margin-top:.75rem">
+      This registers your intent. Our team will contact you with payment details within 24 hours.
+    </p>
+  </form>
+
+  <div class="donate-success" id="donateSuccess" style="display:none">
+    <div style="font-size:3rem">🎉</div>
+    <h3>Thank You!</h3>
+    <p>Your donation intent has been received. Our team will contact you within 24 hours with payment details.</p>
+    <p style="color:var(--green-deep);font-family:var(--font-mono);font-size:.85rem;margin-top:1rem">#ABetterAbuja — Built By All Of Us</p>
+  </div>
+</div>
+
+<style>
+.donate-overlay { position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:1100; opacity:0; pointer-events:none; transition:opacity .3s; }
+.donate-overlay.open { opacity:1; pointer-events:all; }
+.donate-modal { position:fixed; top:50%; left:50%; transform:translate(-50%,-60%); width:min(580px,94vw); max-height:90vh; overflow-y:auto; background:#fff; border-radius:8px; z-index:1200; padding:2.5rem; box-shadow:0 24px 80px rgba(0,0,0,.3); opacity:0; pointer-events:none; transition:opacity .3s, transform .3s; }
+.donate-modal.open { opacity:1; pointer-events:all; transform:translate(-50%,-50%); }
+.donate-close { position:absolute; top:1.25rem; right:1.25rem; width:32px; height:32px; border-radius:50%; background:rgba(42,43,129,.08); color:var(--green-deep); font-size:.9rem; display:flex; align-items:center; justify-content:center; cursor:pointer; border:none; transition:background .2s; }
+.donate-close:hover { background:var(--gold); color:#fff; }
+.donate-modal-eyebrow { font-family:var(--font-mono); font-size:.7rem; text-transform:uppercase; letter-spacing:.12em; color:var(--gold); margin-bottom:.5rem; }
+.donate-modal-title { font-family:var(--font-display); font-size:1.8rem; color:var(--green-deep); margin-bottom:.5rem; }
+.donate-modal-sub { font-size:.9rem; color:#666; margin-bottom:1.5rem; }
+.donate-amounts { display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem; margin-bottom:1.5rem; }
+.donate-amt { padding:.6rem .5rem; border:1.5px solid rgba(42,43,129,.2); border-radius:4px; font-family:var(--font-mono); font-size:.8rem; color:var(--green-deep); cursor:pointer; transition:all .15s; background:#fff; }
+.donate-amt:hover, .donate-amt.selected { background:var(--green-deep); color:#fff; border-color:var(--green-deep); }
+.donate-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.donate-field { margin-bottom:1rem; }
+.donate-field label { display:block; font-family:var(--font-mono); font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; color:var(--green-deep); margin-bottom:.4rem; }
+.donate-field input, .donate-field textarea { width:100%; padding:.8rem 1rem; border:1.5px solid rgba(42,43,129,.2); border-radius:4px; font-size:.9rem; color:var(--near-black); transition:border-color .2s; box-sizing:border-box; }
+.donate-field input:focus, .donate-field textarea:focus { outline:none; border-color:var(--green-deep); }
+.donate-submit { width:100%; padding:1rem; background:var(--green-deep); color:var(--cream); border:none; border-radius:4px; font-family:var(--font-mono); font-size:.9rem; text-transform:uppercase; letter-spacing:.08em; cursor:pointer; transition:background .2s; margin-top:.5rem; }
+.donate-submit:hover { background:var(--gold); }
+.donate-success { text-align:center; padding:2rem 0; }
+.donate-success h3 { font-family:var(--font-display); font-size:1.8rem; color:var(--green-deep); margin:.75rem 0 .5rem; }
+.donate-success p { color:#555; font-size:.9rem; line-height:1.7; }
+@media(max-width:480px) { .donate-amounts { grid-template-columns:repeat(2,1fr); } .donate-row { grid-template-columns:1fr; } }
+</style>
+
 <script src="js/main.js"></script>
 <script>
+  // ── DONATE MODAL ──────────────────────────────────────────
+  function openDonateModal(e) {
+    if (e) e.preventDefault();
+    document.getElementById('donateOverlay').classList.add('open');
+    document.getElementById('donateModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDonateModal() {
+    document.getElementById('donateOverlay').classList.remove('open');
+    document.getElementById('donateModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDonateModal(); });
+
+  function selectAmount(btn) {
+    document.querySelectorAll('.donate-amt').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('selectedAmount').value = btn.dataset.amount;
+    document.getElementById('customAmountField').style.display =
+      btn.dataset.amount === 'Other' ? 'block' : 'none';
+  }
+
+  document.getElementById('donateForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('donateSubmitBtn');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+
+    const payload = {
+      fullName:       document.getElementById('donateName').value,
+      email:          document.getElementById('donateEmail').value,
+      phone:          document.getElementById('donatePhone').value,
+      donationAmount: document.getElementById('selectedAmount').value || 'Not selected',
+      customAmount:   document.getElementById('customAmount').value || '',
+      comment:        document.getElementById('donateComment').value || ''
+    };
+
+    try {
+      const res = await fetch('/api/donation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById('donateForm').style.display = 'none';
+        document.getElementById('donateSuccess').style.display = 'block';
+      } else {
+        btn.textContent = 'Error — Please Try Again';
+        btn.style.background = 'var(--red)';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Network Error — Try Again';
+      btn.disabled = false;
+    }
+  });
+
+  // ── VOLUNTEER FORM ─────────────────────────────────────────
   document.getElementById('volunteerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = this.querySelector('.form-submit');
     btn.textContent = 'Submitting...';
     btn.disabled = true;
 
-    // Collect checkboxes
     const availability = Array.from(this.querySelectorAll('input[type=checkbox]:checked'))
-      .filter(c => c.closest('.form-group') && c.closest('.form-group').querySelector('label')?.textContent.includes('Availability') ||
-                   ['Weekday mornings','Weekday afternoons','Weekday evenings','Saturdays','Sundays','Full-time 10+hrs'].includes(c.parentElement.textContent.trim()))
+      .filter(c => ['Weekday mornings','Weekday afternoons','Weekday evenings','Saturdays','Sundays','Full-time (10+ hrs/week)'].includes(c.parentElement.textContent.trim()))
       .map(c => c.parentElement.textContent.trim());
 
     const skills = Array.from(this.querySelectorAll('input[type=checkbox]:checked'))
-      .filter(c => ['Canvassing','Phone banking','Social media','Event planning','Graphic design',
-                    'Video production','Writing/Content','Has a vehicle','Public speaking','House party hosting',
-                    'Door-to-door canvassing'].some(s => c.parentElement.textContent.includes(s.split('/')[0])))
+      .filter(c => ['Door-to-door canvassing','Phone banking','Social media','Event planning','Graphic design','Video production','Writing / Content','I have a vehicle','Public speaking','Hosting house parties'].includes(c.parentElement.textContent.trim()))
       .map(c => c.parentElement.textContent.trim());
 
     const inputs = this.querySelectorAll('input[type=text], input[type=email], input[type=tel]');
     const selects = this.querySelectorAll('select');
 
     const payload = {
-      fullName:       inputs[0]?.value || '',
-      email:          inputs[1]?.value || '',
-      phone:          inputs[2]?.value || '',
-      whatsapp:       inputs[3]?.value || '',
-      areaCouncil:    selects[0]?.value || '',
-      ward:           inputs[4]?.value || '',
-      ageGroup:       selects[1]?.value || '',
-      volunteerRole:  selects[2]?.value || '',
+      fullName:      inputs[0]?.value || '',
+      email:         inputs[1]?.value || '',
+      phone:         inputs[2]?.value || '',
+      whatsapp:      inputs[3]?.value || '',
+      areaCouncil:   selects[0]?.value || '',
+      ward:          inputs[4]?.value || '',
+      ageGroup:      selects[1]?.value || '',
+      volunteerRole: selects[2]?.value || '',
       availability,
       skills,
-      whyJoining:     this.querySelector('textarea')?.value || '',
-      howHeard:       selects[3]?.value || ''
+      whyJoining:    this.querySelector('textarea')?.value || '',
+      howHeard:      selects[3]?.value || ''
     };
 
     try {
@@ -519,7 +663,6 @@
         body: JSON.stringify(payload)
       });
       const data = await res.json();
-
       if (data.success) {
         this.style.display = 'none';
         document.getElementById('formSuccess').style.display = 'block';

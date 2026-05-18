@@ -112,7 +112,7 @@ input, textarea, select { font-family: inherit; }
   transition: background 0.4s, box-shadow 0.4s;
 }
 .nav.scrolled {
-  background: rgba(8,8,8,0.95);
+  background: rgba(42,43,129,0.97);
   backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 rgba(255,255,255,0.08);
 }
@@ -337,7 +337,7 @@ input, textarea, select { font-family: inherit; }
 /* ─── HOMEPAGE HERO ───────────────────────────────────────── */
 .hero {
   min-height: 100vh;
-  background: var(--near-black);
+  background: var(--green-deep);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -633,7 +633,7 @@ input, textarea, select { font-family: inherit; }
 /* ─── PILLARS SECTION ─────────────────────────────────────── */
 .pillars-section {
   padding: clamp(80px, 12vh, 140px) 0;
-  background: var(--near-black);
+  background: var(--green-deep);
   position: relative;
   overflow: hidden;
 }
@@ -1197,7 +1197,7 @@ input, textarea, select { font-family: inherit; }
 
 /* ─── FOOTER ──────────────────────────────────────────────── */
 .footer {
-  background: var(--black);
+  background: var(--green-deep);
   padding: clamp(60px, 8vh, 100px) 0 0;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
@@ -2491,7 +2491,7 @@ input, textarea, select { font-family: inherit; }
 }
 .hero-text-col > * { position: relative; z-index: 1; }
 /* Remove old bg image approach when split is used */
-.hero-split-inner ~ .hero-stats { position: relative; z-index: 2; background: rgba(0,0,0,.35); }
+.hero-split-inner ~ .hero-stats { position: relative; z-index: 2; background: var(--green-deep); }
 
 /* ─── PAGE HERO — IMAGE RIGHT ────────────────────────────────── */
 .page-header {
@@ -2547,9 +2547,11 @@ input, textarea, select { font-family: inherit; }
   .hero-text-col { padding: 40px 0 60px; }
 }
 
+
+
 /* ─── TV-STYLE VIDEO ─────────────────────────────────────────── */
 .tv-section {
-  background: #0a0a14;
+  background: var(--green-deep);
   padding: 80px 0 60px;
   text-align: center;
 }
@@ -2572,7 +2574,7 @@ input, textarea, select { font-family: inherit; }
   border-radius: 0 0 4px 4px;
 }
 .tv-body {
-  background: linear-gradient(160deg, #1e1e30, #12121f);
+  background: linear-gradient(160deg, #1a1b60, #0f1045);
   border-radius: 20px 20px 8px 8px;
   padding: 24px 24px 20px;
   box-shadow:
@@ -2716,7 +2718,7 @@ input, textarea, select { font-family: inherit; }
   width: auto;
   display: block;
   margin-bottom: 1rem;
-  filter: brightness(0) invert(1);
+  /* filter: brightness(0) invert(1); */
 }
 .footer-ndc-block {
   margin: 1.5rem 0;
@@ -2873,54 +2875,3 @@ input, textarea, select { font-family: inherit; }
     background: linear-gradient(to bottom, transparent 40%, var(--near-black) 100%);
   }
 }
-
-/* ─── SCROLLING PHOTO GALLERY ────────────────────────────────── */
-.gallery-strip-section {
-  background: var(--cream);
-  padding: 60px 0 70px;
-  overflow: hidden;
-}
-.gallery-strip-header {
-  margin-bottom: 2.5rem;
-}
-.gallery-track-wrapper {
-  overflow: hidden;
-  width: 100%;
-}
-.gallery-track {
-  display: flex;
-  gap: 12px;
-  width: max-content;
-}
-.track-left {
-  animation: scrollLeft 40s linear infinite;
-}
-.track-right {
-  animation: scrollRight 40s linear infinite;
-}
-.gallery-track:hover { animation-play-state: paused; }
-@keyframes scrollLeft {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-@keyframes scrollRight {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
-}
-.gallery-item {
-  width: 280px;
-  height: 190px;
-  border-radius: 8px;
-  overflow: hidden;
-  flex-shrink: 0;
-  position: relative;
-}
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-  transition: transform .4s ease;
-}
-.gallery-item:hover img { transform: scale(1.05); }
